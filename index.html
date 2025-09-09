@@ -1,94 +1,219 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Juan Carlos Durán - Página Personal</title>
-<style>
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f9f9f9;
-    margin: 0; padding: 0;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  header {
-    background: #0a74da;
-    color: white;
-    padding: 60px 20px 80px;
-    text-align: center;
-  }
-  header h1 {
-    font-size: 4rem;
-    margin: 0 0 15px;
-    font-weight: 700;
-  }
-  header p {
-    font-size: 1.8rem;
-    margin: 0;
-    font-weight: 400;
-  }
-  main {
-    max-width: 800px;
-    background: white;
-    margin: -60px auto 40px;
-    padding: 40px 30px;
-    box-shadow: 0 8px 30px rgb(0 0 0 / 0.1);
-    border-radius: 12px;
-    flex-grow: 1;
-  }
-  section {
-    margin-bottom: 36px;
-  }
-  h2 {
-    font-size: 1.8rem;
-    color: #0a74da;
-    border-bottom: 3px solid #0a74da;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    font-weight: 600;
-  }
-  p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #444;
-  }
-  a {
-    color: #0a74da;
-    text-decoration: none;
-    font-weight: 600;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-  footer {
-    background: #f0f0f0;
-    color: #666;
-    text-align: center;
-    padding: 20px 10px;
-    font-size: 0.9rem;
-  }
-</style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Juan Carlos Durán - Blog</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      background: #fcfcfc;
+      color: #222;
+    }
+    .navbar {
+      width: 100%;
+      position: sticky;
+      top: 0;
+      background: #111;
+      z-index: 100;
+    }
+    .navbar ul {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      margin: 0;
+      padding: 0 20px;
+      height: 52px;
+    }
+    .navbar li {
+      margin-right: 34px;
+    }
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color .2s;
+      padding: 0;
+    }
+    .navbar a:hover {
+      color: #2a8aff;
+    }
+    .container {
+      max-width: 1150px;
+      margin: 36px auto 0 auto;
+      display: flex;
+      gap: 38px;
+      padding: 0 16px 40px 16px;
+      height: 80vh;
+    }
+    .main-content {
+      flex: 3;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+    .sidebar {
+      flex: 1.1;
+      min-width: 260px;
+      background: #fafafa;
+      border-radius: 12px;
+      padding: 24px 22px;
+      box-shadow: 0 4px 28px rgba(0,0,0,0.05);
+      height: 80vh;
+      overflow-y: auto;
+      margin-top: 10px;
+    }
+    .post {
+      margin-bottom: 54px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.07);
+      padding: 28px 22px;
+      transition: box-shadow .2s;
+    }
+    .post:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,.11);
+    }
+    .post-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #161674;
+    }
+    .post img {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.09);
+      margin-bottom: 14px;
+      object-fit: cover;
+      height: 340px;
+    }
+    .post-excerpt {
+      font-size: 1.11rem;
+      color: #444;
+      margin-bottom: 11px;
+      line-height: 1.6;
+    }
+    .read-more {
+      color: #2a8aff;
+      font-size: 1rem;
+      text-decoration: underline;
+    }
+    .sidebar h4 {
+      margin-bottom: 16px;
+      font-size: 1.17rem;
+      color: #0047ab;
+      border-bottom: 2px solid #2a8aff;
+      padding-bottom: 6px;
+    }
+    .sidebar .widget {
+      margin-bottom: 32px;
+    }
+    .sidebar .widget img {
+      border-radius: 50%;
+      width: 48px;
+      vertical-align: middle;
+      margin-right: 12px;
+    }
+    .sidebar .widget a {
+      color: #2a8aff;
+      font-weight: 600;
+      text-decoration:none;
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .sidebar .widget a:hover {
+      text-decoration: underline;
+    }
+    .sidebar .widget ul {
+      padding-left: 18px;
+      margin: 10px 0 0 0;
+    }
+    .sidebar .widget ul li {
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+    }
+    .sidebar .widget p {
+      font-size: 0.95rem;
+      color: #444;
+      margin-top: 4px;
+      margin-bottom: 12px;
+    }
+    @media (max-width: 900px) {
+      .container { flex-direction: column; height: auto; }
+      .sidebar { margin-top: 35px; height: auto; }
+      .main-content { padding-right: 0; height: auto; }
+    }
+  </style>
 </head>
 <body>
-<header>
-  <h1>Juan Carlos Durán</h1>
-  <p>Apasionado por compartir conocimiento y construir conexiones valiosas</p>
-</header>
-<main>
-  <section>
-    <h2>Sobre mí</h2>
-    <p>Profesional con experiencia dedicada a [inserta tu área o especialidad]. Me encanta aprender y ayudar a otros a crecer a través de contenido valioso y colaboraciones.</p>
-  </section>
-  <section>
-    <h2>Contacto</h2>
-    <p>Conecta conmigo en <a href="https://www.linkedin.com/in/tu-perfil" target="_blank" rel="noopener noreferrer">LinkedIn</a> para intercambiar ideas, oportunidades y crecer profesionalmente.</p>
-  </section>
-</main>
-<footer>
-  <p>© 2025 Juan Carlos Durán. Todos los derechos reservados.</p>
-</footer>
+<nav class="navbar">
+  <ul>
+    <li><a href="#">INICIO</a></li>
+    <li><a href="#">ARTÍCULOS</a></li>
+    <li><a href="#">FOTOGRAFÍA</a></li>
+    <li><a href="#">CONTACTO</a></li>
+  </ul>
+</nav>
+<div class="container">
+  <div class="main-content">
+    <div class="post">
+      <div class="post-title">El Futuro de la Energía Renovable</div>
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Energía Renovable" />
+      <div class="post-excerpt">
+        Exploramos las tendencias recientes en energías limpias y su impacto en la sostenibilidad global.
+      </div>
+      <a href="#" class="read-more">Leer más...</a>
+    </div>
+    <div class="post">
+      <div class="post-title">Mercados Financieros en Transformación</div>
+      <img src="https://images.unsplash.com/photo-1554224154-22dec7ec8818?auto=format&fit=crop&w=800&q=80" alt="Mercados Financieros" />
+      <div class="post-excerpt">
+        Análisis profundo sobre la evolución del mercado financiero mundial y nuevas oportunidades de inversión.
+      </div>
+      <a href="#" class="read-more">Leer más...</a>
+    </div>
+    <div class="post">
+      <div class="post-title">Inteligencia Artificial y su Rol en la Industria</div>
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Inteligencia Artificial" />
+      <div class="post-excerpt">
+        Descubre cómo la IA está revolucionando procesos industriales, desde la automatización hasta la toma de decisiones.
+      </div>
+      <a href="#" class="read-more">Leer más...</a>
+    </div>
+    <!-- Agrega más artículos aquí -->
+  </div>
+  <div class="sidebar">
+    <div class="widget">
+      <h4>Sobre Juan Carlos Durán</h4>
+      <p>Apasionado por la tecnología, la inteligencia artificial y los mercados. Aquí comparto análisis y novedades.</p>
+    </div>
+    <div class="widget">
+      <h4>LinkedIn</h4>
+      <a href="https://www.linkedin.com/in/tu-perfil" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn logo" />
+        Juan Carlos Durán
+      </a>
+      <ul>
+        <li><a href="https://www.linkedin.com/pulse/tu-post-1" target="_blank">Título del post en LinkedIn 1</a></li>
+        <li><a href="https://www.linkedin.com/pulse/tu-post-2" target="_blank">Título del post en LinkedIn 2</a></li>
+        <li><a href="https://www.linkedin.com/pulse/tu-post-3" target="_blank">Título del post en LinkedIn 3</a></li>
+      </ul>
+    </div>
+    <div class="widget">
+      <h4>Substack</h4>
+      <a href="https://tu-substack.substack.com" target="_blank" rel="noopener noreferrer" style="color:#ff671f; font-weight:700; text-decoration:none;">
+        Suscríbete a mi newsletter en Substack
+      </a>
+      <ul>
+        <li><a href="https://tu-substack.substack.com/p/entrada-1" target="_blank">Entrada del boletín 1</a></li>
+        <li><a href="https://tu-substack.substack.com/p/entrada-2" target="_blank">Entrada del boletín 2</a></li>
+        <li><a href="https://tu-substack.substack.com/p/entrada-3" target="_blank">Entrada del boletín 3</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
 </body>
 </html>
