@@ -1,108 +1,161 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Juan Carlos Durán - Bienvenido</title>
-<style>
-  body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #fff;
-    color: #222;
-    margin: 0; padding: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-  header {
-    background: #0a74da;
-    color: white;
-    padding: 60px 20px 80px;
-    text-align: center;
-  }
-  header h1 {
-    font-size: 4.5rem;
-    margin: 0 0 15px;
-    font-weight: 700;
-  }
-  header p {
-    font-size: 2rem;
-    margin: 0;
-    font-weight: 400;
-  }
-  main {
-    max-width: 850px;
-    margin: -50px auto 40px;
-    background: #f9f9f9;
-    box-shadow: 0 8px 30px rgb(0 0 0 / 0.1);
-    padding: 40px 30px;
-    border-radius: 12px;
-  }
-  section {
-    margin-bottom: 36px;
-  }
-  h2 {
-    font-weight: 600;
-    font-size: 1.8rem;
-    color: #0a74da;
-    border-bottom: 3px solid #0a74da;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-  }
-  p, ul {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #444;
-  }
-  ul {
-    padding-left: 20px;
-  }
-  ul li {
-    margin-bottom: 8px;
-  }
-  a {
-    color: #0a74da;
-    text-decoration: none;
-    font-weight: 600;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-  footer {
-    margin-top: auto;
-    background: #f0f0f0;
-    color: #666;
-    text-align: center;
-    padding: 20px 10px;
-    font-size: 0.9rem;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>jcduran - Landing Page Personal</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      color: #222;
+      background: #f9f9f9;
+    }
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    header h1 {
+      margin: 0;
+      font-weight: bold;
+    }
+    nav a {
+      color: #ffd700;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    section {
+      max-width: 720px;
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+      background: white;
+      box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+      border-radius: 8px;
+    }
+    section h2 {
+      color: #003366;
+      margin-bottom: 0.5rem;
+    }
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem 3rem;
+      background: linear-gradient(135deg, #003366 0%, #0055a5 100%);
+      color: white;
+    }
+    .hero h2 {
+      color: white;
+    }
+    .hero p {
+      max-width: 480px;
+      margin: 1rem auto 0;
+      font-size: 1.1rem;
+      color: white;
+    }
+    .btn {
+      display: inline-block;
+      background: #ffd700;
+      color: #003366;
+      padding: 0.75rem 2rem;
+      margin-top: 1.5rem;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(0, 51, 102, 0.25);
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background: #e6c200;
+    }
+    .links-list {
+      list-style: none;
+      padding-left: 0;
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .links-list li a {
+      color: #0055a5;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .links-list li a:hover {
+      text-decoration: underline;
+    }
+    form input, form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      font-family: inherit;
+      resize: vertical;
+    }
+    form input[type="submit"] {
+      background: #003366;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    form input[type="submit"]:hover {
+      background: #0055a5;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem 2rem;
+      background: #003366;
+      color: white;
+      font-size: 0.9rem;
+      margin-top: 3rem;
+    }
+  </style>
 </head>
 <body>
-<header>
-  <h1>Juan Carlos Durán</h1>
-  <p>Bienvenido a mi espacio personal</p>
-</header>
-<main>
-  <section>
-    <h2>Sobre mí</h2>
-    <p>Soy un apasionado de la tecnología, el desarrollo web y la creación de contenido digital. Este es un lugar donde comparto proyectos, ideas y más.</p>
+  <header>
+    <h1>jcduran</h1>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#sobremi">Sobre mí</a>
+      <a href="#linkedin">LinkedIn</a>
+      <a href="#newsletter">Newsletter</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="inicio">
+    <h2>Bienvenido a mi espacio personal</h2>
+    <p>Soy jcduran, apasionado por compartir conocimiento y construir conexiones valiosas.</p>
+    <a href="#contacto" class="btn">Contáctame</a>
   </section>
-  <section>
-    <h2>Proyectos Destacados</h2>
-    <ul>
-      <li><a href="#">Proyecto A - Sitio web personal</a></li>
-      <li><a href="#">Proyecto B - Aplicación interactiva</a></li>
-      <li><a href="#">Proyecto C - Blog tecnológico</a></li>
+
+  <section id="sobremi">
+    <h2>Sobre mí</h2>
+    <p>Profesional con experiencia dedicada a [inserta tu área o especialidad]. Me encanta aprender y ayudar a otros a crecer a través de contenido valioso y colaboraciones.</p>
+  </section>
+
+  <section id="linkedin">
+    <h2>LinkedIn</h2>
+    <p>Conecta conmigo en LinkedIn para intercambiar ideas, oportunidades y crecer profesionalmente.</p>
+    <ul class="links-list">
+      <li><a href="https://www.linkedin.com/in/tu-perfil" target="_blank" rel="noopener">Mi perfil LinkedIn</a></li>
     </ul>
   </section>
-  <section>
-    <h2>Contacto</h2>
-    <p>Para trabajar conmigo o simplemente saludar, escríbeme a <a href="mailto:juan@example.com">juan@example.com</a></p>
-  </section>
-</main>
-<footer>
-  <p>© 2025 Juan Carlos Durán. Todos los derechos reservados.</p>
-</footer>
-</body>
-</html>
+
+  <section id="newsletter">
+    <h2>Newsletter</h2>
+    <p>Suscríbete a mi newsletter en Substack para
