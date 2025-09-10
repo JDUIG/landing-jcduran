@@ -79,17 +79,22 @@
       .nav-links.open{display:flex;}
     }
 
-    /* LOGO HERO (debajo del navbar, alineado a la izquierda) */
+    /* LOGO HERO (debajo del navbar, alineado a la izquierda y mas grande) */
     .hero-logo{
       max-width:1180px;margin:30px auto 0 auto;padding:0 24px;text-align:left;
     }
-    .hero-logo img{max-height:120px;height:auto;width:auto;}
-
-    /* CONTENEDOR */
-    .container{
-      max-width:1180px;margin:24px auto 60px;display:flex;gap:48px;padding:0 24px;min-height:80vh;
+    .hero-logo img{
+      max-width:80%;   /* ocupa el 80% del ancho en escritorio */
+      max-height:250px;/* hasta 250px de alto */
+      height:auto;
+      width:auto;
     }
-    .main-content{flex:2.5;display:flex;flex-direction:column;gap:56px;}
+    @media (max-width:768px){
+      .hero-logo img{
+        max-width:100%;   /* ocupa todo el ancho en móvil */
+        max-height:180px; /* altura limitada para no tapar toda la pantalla */
+      }
+    }
 
     /* SECCIONES */
     section{
@@ -296,3 +301,4 @@
   </script>
 </body>
 </html>
+
