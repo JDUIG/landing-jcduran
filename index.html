@@ -83,18 +83,21 @@
     .hero-logo{
       max-width:1180px;margin:30px auto 0 auto;padding:0 24px;text-align:left;
     }
-    .hero-logo img{
-      max-width:60%;   /* ocupa el 80% del ancho en escritorio */
-      max-height:250px;/* hasta 250px de alto */
-      height:auto;
-      width:auto;
-    }
-    @media (max-width:768px){
-      .hero-logo img{
-        max-width:100%;   /* ocupa todo el ancho en móvil */
-        max-height:180px; /* altura limitada para no tapar toda la pantalla */
-      }
-    }
+    .hero-logo img {
+  /* Tamaño fluido: mínimo 280px, ideal ~50% del ancho de pantalla, máximo 720px */
+  width: clamp(280px, 50vw, 720px);
+  height: auto;
+  display: block;        /* elimina huecos de línea */
+  image-rendering: auto; /* asegura buen escalado */
+}
+
+@media (max-width: 768px) {
+  .hero-logo img {
+    /* En móvil: un poco más ancho, pero limitado para que no invada demasiado */
+    width: clamp(220px, 85vw, 560px);
+  }
+}
+
 
     /* SECCIONES */
     section{
@@ -301,5 +304,6 @@
   </script>
 </body>
 </html>
+
 
 
