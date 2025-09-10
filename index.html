@@ -6,260 +6,164 @@
   <title>Juan Carlos Durán - Blog Personal</title>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Lora:wght@700&family=Montserrat:wght@400;600&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     /* Paleta Negro + Turquesa */
-    :root {
-      --color-primario: #111827;   /* negro */
-      --color-acento: #06B6D4;     /* turquesa */
-      --color-fondo: #E5E7EB;      /* gris claro */
-      --color-texto: #F9FAFB;      /* casi blanco */
+    :root{
+      --primario:#111827;   /* negro */
+      --acento:#06B6D4;     /* turquesa */
+      --fondo:#E5E7EB;      /* gris claro */
+      --texto:#111;         /* texto principal */
+      --texto-inv:#F9FAFB;  /* texto sobre oscuro */
     }
 
-    body {
-      font-family: "Montserrat", sans-serif;
-      margin: 0;
-      background: var(--color-fondo);
-      color: #111;
-      line-height: 1.6;
+    /* Tipografía base */
+    body{
+      font-family:"Montserrat",sans-serif;
+      font-weight:400;
+      margin:0;
+      background:var(--fondo);
+      color:var(--texto);
+      line-height:1.6;
     }
+
+    /* Utilidades tipográficas (por si las quieres usar en el contenido) */
+    .t-lora{font-family:"Lora",serif;font-weight:700;}
+    .t-poppins{font-family:"Poppins",sans-serif;font-weight:800;}
+    .t-script{font-family:"Dancing Script",cursive;font-weight:700;}
 
     /* NAVBAR */
-    .navbar {
-      width: 100%;
-      position: sticky;
-      top: 0;
-      background: var(--color-primario);
-      z-index: 1000;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    .navbar{
+      position:sticky;top:0;width:100%;
+      background:var(--primario);
+      z-index:1000;
+      box-shadow:0 2px 6px rgba(0,0,0,.3);
     }
-    .nav-container {
-      max-width: 1180px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 16px;
-      height: 56px;
+    .nav-container{
+      max-width:1180px;margin:0 auto;
+      display:flex;justify-content:space-between;align-items:center;
+      padding:0 16px;height:56px;
     }
-    .logo {
-      color: var(--color-texto);
-      font-family: "Lora", serif;
-      font-size: 1.1rem;
-      font-weight: 700;
+    .logo-text{ /* por si quieres mantener texto además del logo hero */
+      color:var(--texto-inv);
+      font-family:"Lora",serif;font-weight:700;font-size:1.1rem;
     }
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      color: var(--color-texto);
-      cursor: pointer;
+    .menu-toggle{
+      display:none;background:none;border:0;
+      font-size:1.5rem;color:var(--texto-inv);cursor:pointer;
     }
-    .nav-wrapper {
-      flex: 1;
-      display: flex;
-      justify-content: center;
+    .nav-wrapper{flex:1;display:flex;justify-content:center;}
+    .nav-links{
+      display:flex;gap:28px;list-style:none;margin:0;padding:0;
     }
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-      margin: 0;
-      padding: 0;
+    .nav-links a{
+      color:var(--texto-inv);text-decoration:none;font-weight:600;font-size:1rem;
+      padding-bottom:4px;border-bottom:2px solid transparent;transition:.25s;
     }
-    .nav-links li a {
-      color: var(--color-texto);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      padding-bottom: 4px;
-      border-bottom: 2px solid transparent;
-      transition: 0.25s;
-    }
-    .nav-links li a:hover,
-    .nav-links li a.active {
-      color: var(--color-acento);
-      border-color: var(--color-acento);
-    }
-    .nav-links i { margin-right: 6px; }
+    .nav-links a:hover,.nav-links a.active{color:var(--acento);border-color:var(--acento);}
+    .nav-links i{margin-right:6px;}
 
-    /* Responsive menú hamburguesa */
-    @media (max-width: 768px) {
-      .menu-toggle { display: block; }
-      .nav-wrapper { justify-content: flex-end; }
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 56px;
-        left: 0;
-        width: 100%;
-        background: var(--color-primario);
-        flex-direction: column;
-        align-items: center;
-        padding: 20px 0;
-        gap: 20px;
+    /* Responsive menú */
+    @media (max-width:768px){
+      .menu-toggle{display:block;}
+      .nav-wrapper{justify-content:flex-end;}
+      .nav-links{
+        display:none;position:absolute;top:56px;left:0;width:100%;
+        background:var(--primario);flex-direction:column;align-items:center;
+        padding:20px 0;gap:20px;
       }
-      .nav-links.open { display: flex; }
+      .nav-links.open{display:flex;}
     }
+
+    /* LOGO HERO (debajo del navbar, alineado a la izquierda) */
+    .hero-logo{
+      max-width:1180px;margin:30px auto 0 auto;padding:0 24px;text-align:left;
+    }
+    .hero-logo img{max-height:120px;height:auto;width:auto;}
 
     /* CONTENEDOR */
-    .container {
-      max-width: 1180px;
-      margin: 48px auto 60px;
-      display: flex;
-      gap: 48px;
-      padding: 0 24px;
-      min-height: 80vh;
+    .container{
+      max-width:1180px;margin:24px auto 60px;display:flex;gap:48px;padding:0 24px;min-height:80vh;
     }
-    .main-content {
-      flex: 2.5;
-      display: flex;
-      flex-direction: column;
-      gap: 56px;
-    }
+    .main-content{flex:2.5;display:flex;flex-direction:column;gap:56px;}
 
     /* SECCIONES */
-    section {
-      background: #fff;
-      border-radius: 12px;
-      padding: 28px 28px 36px;
-      box-shadow: 0 3px 18px rgba(0, 0, 0, 0.08);
+    section{
+      background:#fff;border-radius:12px;padding:28px 28px 36px;
+      box-shadow:0 3px 18px rgba(0,0,0,.08);
     }
-    section h2 {
-      font-family: "Lora", serif;
-      font-size: 2.1rem;
-      color: var(--color-primario);
-      margin-bottom: 18px;
-      font-weight: 700;
-      border-bottom: 3px solid var(--color-acento);
-      padding-bottom: 6px;
+    section h2{
+      font-family:"Lora",serif;font-weight:700;font-size:2.1rem;
+      color:var(--primario);margin-bottom:18px;border-bottom:3px solid var(--acento);padding-bottom:6px;
     }
 
     /* POSTS */
-    .post { margin-bottom: 42px; }
-    .post-title {
-      font-family: "Lora", serif;
-      font-size: 1.9rem;
-      font-weight: 700;
-      margin-bottom: 14px;
-      color: #111;
+    .post{margin-bottom:42px;}
+    .post-title{
+      font-family:"Lora",serif;font-weight:700;font-size:1.9rem;margin-bottom:14px;color:var(--texto);
     }
-    .post img {
-      width: 100%;
-      height: 340px;
-      object-fit: cover;
-      border-radius: 10px;
-      margin-bottom: 12px;
-      box-shadow: 0 1px 10px rgba(0, 0, 0, 0.12);
-      transition: transform 0.3s ease;
+    .post img{
+      width:100%;height:340px;object-fit:cover;border-radius:10px;margin-bottom:12px;
+      box-shadow:0 1px 10px rgba(0,0,0,.12);transition:transform .3s;
     }
-    .post img:hover { transform: scale(1.03); }
-    .post-excerpt { font-size: 1.12rem; color: #444; margin-bottom: 8px; }
-    .read-more {
-      color: var(--color-acento);
-      font-weight: 600;
-      text-decoration: underline;
-    }
+    .post img:hover{transform:scale(1.03);}
+    .post-excerpt{font-size:1.12rem;color:#444;margin-bottom:8px;}
+    .read-more{color:var(--acento);font-weight:600;text-decoration:underline;}
 
     /* GRID (Conceptos / Formación) */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 18px;
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;}
+    .card{
+      grid-column:span 12;background:#fff;border:1px solid #eee;border-radius:12px;padding:18px;
+      box-shadow:0 2px 10px rgba(0,0,0,.05);
     }
-    .card {
-      grid-column: span 12;
-      background: #fff;
-      border: 1px solid #eee;
-      border-radius: 12px;
-      padding: 18px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    }
-    .card h4 {
-      font-family: "Lora", serif;
-      margin: 0 0 8px;
-      font-size: 1.2rem;
-      color: var(--color-primario);
-    }
-    .card p { margin: 0 0 10px; color: #444; }
-    .card a { color: var(--color-acento); font-weight: 600; text-decoration: none; }
-    .card a:hover { text-decoration: underline; }
-
-    @media (min-width: 720px) { .card { grid-column: span 6; } }
-    @media (min-width: 1024px) { .card { grid-column: span 4; } }
+    .card h4{font-family:"Lora",serif;font-weight:700;margin:0 0 8px;font-size:1.2rem;color:var(--primario);}
+    .card p{margin:0 0 10px;color:#444;}
+    .card a{color:var(--acento);font-weight:600;text-decoration:none;}
+    .card a:hover{text-decoration:underline;}
+    @media (min-width:720px){.card{grid-column:span 6;}}
+    @media (min-width:1024px){.card{grid-column:span 4;}}
 
     /* ACTUALIDAD */
-    .sabias-article {
-      margin-bottom: 30px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid #ddd;
-    }
-    .sabias-title {
-      font-family: "Lora", serif;
-      font-weight: 700;
-      font-size: 1.3rem;
-      color: var(--color-primario);
-      margin-bottom: 8px;
-    }
+    .sabias-article{margin-bottom:30px;padding-bottom:20px;border-bottom:1px solid #ddd;}
+    .sabias-title{font-family:"Lora",serif;font-weight:700;font-size:1.3rem;color:var(--primario);margin-bottom:8px;}
 
-    /* SIDEBAR STICKY */
-    .sidebar {
-      flex: 1.2;
-      min-width: 280px;
-      background: #fafafa;
-      border-radius: 12px;
-      padding: 28px 26px;
-      box-shadow: 0 4px 28px rgba(0, 0, 0, 0.06);
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-      font-size: 0.95rem;
-      position: sticky;
-      top: 80px; /* para dejar espacio al navbar */
-      align-self: flex-start;
+    /* SIDEBAR sticky */
+    .sidebar{
+      flex:1.2;min-width:280px;background:#fafafa;border-radius:12px;padding:28px 26px;
+      box-shadow:0 4px 28px rgba(0,0,0,.06);display:flex;flex-direction:column;gap:32px;font-size:.95rem;
+      position:sticky;top:80px;align-self:flex-start;
     }
-    .widget h3 {
-      font-family: "Lora", serif;
-      font-size: 1.25rem;
-      color: var(--color-primario);
-      margin-bottom: 18px;
-      border-bottom: 2px solid var(--color-acento);
-      padding-bottom: 6px;
+    .widget h3{
+      font-family:"Lora",serif;font-size:1.25rem;color:var(--primario);
+      margin-bottom:18px;border-bottom:2px solid var(--acento);padding-bottom:6px;
     }
-    .widget a.profile-link {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      font-weight: 600;
-      color: var(--color-primario);
-      text-decoration: none;
-      margin-bottom: 10px;
+    .widget a.profile-link{
+      display:flex;gap:12px;align-items:center;font-weight:600;color:var(--primario);
+      text-decoration:none;margin-bottom:10px;
     }
-    .widget a.profile-link:hover { color: var(--color-acento); }
-    .widget a.profile-link img {
-      width: 48px; height: 48px; display: block; border-radius: 0;
-    }
+    .widget a.profile-link:hover{color:var(--acento);}
+    .widget a.profile-link img{width:48px;height:48px;display:block;border-radius:0;}
+    .widget p.widget-desc{margin-bottom:16px;}
 
     /* Responsive general */
-    @media (max-width: 980px) {
-      .container { flex-direction: column; }
-      .main-content { margin-bottom: 40px; }
-      .sidebar { position: static; } /* en móvil no hace falta sticky */
+    @media (max-width:980px){
+      .container{flex-direction:column;}
+      .main-content{margin-bottom:40px;}
+      .sidebar{position:static;}
     }
   </style>
 </head>
 <body>
 
   <!-- NAV -->
-  <nav class="navbar">
+  <nav class="navbar" role="navigation" aria-label="Menú principal">
     <div class="nav-container">
-      <div class="logo">Juan Carlos Durán</div>
-      <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+      <div class="logo-text">Juan Carlos Durán</div>
+      <button class="menu-toggle" aria-label="Abrir menú"><i class="fas fa-bars"></i></button>
       <div class="nav-wrapper">
         <ul class="nav-links">
           <li><a href="#acerca" class="active"><i class="fas fa-user"></i> ACERCA DE</a></li>
@@ -273,8 +177,14 @@
     </div>
   </nav>
 
+  <!-- LOGO HERO (izquierda, alineado con el contenedor) -->
+  <div class="hero-logo">
+    <img src="img/logo-jcd.png" alt="Juan Carlos Durán - Logo">
+  </div>
+
   <div class="container">
     <main class="main-content">
+      <!-- Acerca de -->
       <section id="acerca">
         <h2>Acerca de mí</h2>
         <p>
@@ -283,6 +193,7 @@
         </p>
       </section>
 
+      <!-- Artículos -->
       <section id="articulos">
         <h2>Artículos</h2>
         <article class="post">
@@ -293,6 +204,7 @@
         </article>
       </section>
 
+      <!-- Actualidad -->
       <section id="actualidad">
         <h2>Actualidad</h2>
         <article class="sabias-article">
@@ -302,6 +214,7 @@
         </article>
       </section>
 
+      <!-- Conceptos -->
       <section id="conceptos">
         <h2>Conceptos</h2>
         <div class="grid">
@@ -313,6 +226,7 @@
         </div>
       </section>
 
+      <!-- Formación -->
       <section id="formacion">
         <h2>Formación</h2>
         <div class="grid">
@@ -324,6 +238,7 @@
         </div>
       </section>
 
+      <!-- Contacta -->
       <section id="contacta">
         <h2>Contacta conmigo</h2>
         <p>¿Te gustaría colaborar, recibir asesoría o conversar sobre innovación y talento?</p>
@@ -335,18 +250,18 @@
       </section>
     </main>
 
-    <aside class="sidebar">
+    <!-- Sidebar sticky -->
+    <aside class="sidebar" aria-label="Barra lateral con perfil y publicaciones">
       <div class="widget">
         <h3>Perfil y redes</h3>
         <!-- LinkedIn -->
-        <a href="https://www.linkedin.com/in/tu-perfil" target="_blank" class="profile-link">
+        <a href="https://www.linkedin.com/in/tu-perfil" target="_blank" rel="noopener" class="profile-link">
           <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" /> 
           Juan Carlos Durán
         </a>
         <p class="widget-desc">Sígueme en LinkedIn para conectar y compartir ideas profesionales.</p>
-
         <!-- Substack -->
-        <a href="https://tu-substack.substack.com" target="_blank" class="profile-link">
+        <a href="https://tu-substack.substack.com" target="_blank" rel="noopener" class="profile-link">
           <img src="https://cdn.worldvectorlogo.com/logos/substack-1.svg" alt="Substack" /> 
           Alpha & Grid newsletter en Substack
         </a>
@@ -364,16 +279,13 @@
     // Activar link según scroll
     const sections = document.querySelectorAll("main section");
     const links = document.querySelectorAll(".nav-links a");
-    function onScroll() {
+    function onScroll(){
       let scrollPos = window.scrollY || document.documentElement.scrollTop;
-      sections.forEach((section) => {
-        if (
-          scrollPos >= section.offsetTop - 60 &&
-          scrollPos < section.offsetTop + section.offsetHeight - 60
-        ) {
-          links.forEach((link) => {
+      sections.forEach((section)=>{
+        if(scrollPos >= section.offsetTop - 60 && scrollPos < section.offsetTop + section.offsetHeight - 60){
+          links.forEach((link)=>{
             link.classList.remove("active");
-            if (link.getAttribute("href").substring(1) === section.id) {
+            if(link.getAttribute("href").substring(1) === section.id){
               link.classList.add("active");
             }
           });
