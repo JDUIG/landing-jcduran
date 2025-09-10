@@ -21,6 +21,21 @@
       background: #111;
       z-index: 100;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      gap: 40px;
+      height: 56px;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+    .logo-container img {
+      height: 48px;
+      width: auto;
+      display: block;
     }
     .navbar ul {
       display: flex;
@@ -28,11 +43,11 @@
       align-items: center;
       list-style: none;
       margin: 0;
-      padding: 0 24px;
-      height: 56px;
+      padding: 0;
       gap: 48px;
       font-weight: 600;
       font-size: 1.1rem;
+      flex-grow: 1;
     }
     .navbar li {
       margin: 0;
@@ -249,7 +264,10 @@
   </style>
 </head>
 <body>
-  <nav class="navbar">
+  <nav class="navbar" role="navigation" aria-label="Menú principal">
+    <div class="logo-container" tabindex="0">
+      <img src="https://pplx-res.cloudinary.com/image/upload/v1757495169/gemini_images/crhl45okuedtfelzj0gy.png" alt="Logo Juan Carlos Durán" />
+    </div>
     <ul>
       <li><a href="#acerca" class="active">ACERCA DE</a></li>
       <li><a href="#articulos">ARTÍCULOS DESTACADOS</a></li>
@@ -266,7 +284,6 @@
           Soy Juan Carlos Durán, apasionado por la tecnología, la inteligencia artificial, los mercados financieros y la energía. En este espacio comparto análisis, ideas y recursos para potenciar el crecimiento profesional y personal.
         </p>
       </section>
-
       <!-- Artículos Destacados -->
       <section id="articulos" tabindex="-1">
         <h2>Artículos Destacados</h2>
@@ -295,7 +312,6 @@
           <a href="#" class="read-more">Leer más...</a>
         </article>
       </section>
-
       <!-- Observatorio -->
       <section id="observatorio" tabindex="-1">
         <h2>Observatorio</h2>
@@ -321,7 +337,6 @@
           </p>
         </article>
       </section>
-
       <!-- Contacta -->
       <section id="contacta" tabindex="-1">
         <h2>Contacta conmigo</h2>
@@ -332,7 +347,6 @@
         </p>
       </section>
     </main>
-
     <aside class="sidebar" aria-label="Barra lateral con perfil y publicaciones">
       <div class="widget">
         <h3>Perfil y redes</h3>
@@ -350,7 +364,6 @@
           Recibe análisis exclusivos y novedades directas en tu correo.
         </p>
       </div>
-
       <div class="widget">
         <h3>Artículos en LinkedIn</h3>
         <ul class="widget-list">
@@ -359,7 +372,6 @@
           <li><a href="https://www.linkedin.com/pulse/tu-post-3" target="_blank" rel="noopener noreferrer">Inteligencia artificial: mitos y realidades</a></li>
         </ul>
       </div>
-
       <div class="widget">
         <h3>Boletín en Substack</h3>
         <ul class="widget-list">
@@ -370,12 +382,10 @@
       </div>
     </aside>
   </div>
-
   <script>
     // Script to toggle active nav link based on scroll position
     const sections = document.querySelectorAll("main section");
     const navLinks = document.querySelectorAll(".navbar a");
-
     function onScroll() {
       let scrollPos = window.scrollY || document.documentElement.scrollTop;
       sections.forEach((section) => {
@@ -392,7 +402,6 @@
         }
       });
     }
-
     window.addEventListener("scroll", onScroll);
   </script>
 </body>
