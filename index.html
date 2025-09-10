@@ -5,28 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Juan Carlos Durán - Blog Personal</title>
 
-  <!-- Font Awesome para iconos -->
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
+    /* Paleta */
+    :root {
+      --color-primario: #1E40AF;   /* azul */
+      --color-acento: #FF6719;     /* naranja */
+      --color-fondo: #F3F4F6;
+      --color-texto: #222;
+    }
+
     body {
-      font-family: "Segoe UI", Arial, sans-serif;
+      font-family: "Montserrat", sans-serif;
       margin: 0;
       background: #fcfcfc;
-      color: #222;
+      color: var(--color-texto);
       line-height: 1.6;
     }
 
-    /* Barra de navegación */
+    /* NAVBAR */
     .navbar {
       width: 100%;
       position: sticky;
       top: 0;
-      background: #111;
+      background: var(--color-primario);
       z-index: 1000;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
     }
     .nav-container {
+      max-width: 1180px;
+      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -35,8 +48,9 @@
     }
     .logo {
       color: #fff;
+      font-family: "Lora", serif;
+      font-size: 1.1rem;
       font-weight: 700;
-      font-size: 1rem;
     }
     .menu-toggle {
       display: none;
@@ -45,6 +59,11 @@
       font-size: 1.5rem;
       color: #fff;
       cursor: pointer;
+    }
+    .nav-wrapper {
+      flex: 1;
+      display: flex;
+      justify-content: center;
     }
     .nav-links {
       display: flex;
@@ -64,36 +83,31 @@
     }
     .nav-links li a:hover,
     .nav-links li a.active {
-      color: #2a8aff;
-      border-color: #2a8aff;
+      color: var(--color-acento);
+      border-color: var(--color-acento);
     }
-    .nav-links i {
-      margin-right: 6px;
-    }
+    .nav-links i { margin-right: 6px; }
 
     /* Responsive menú hamburguesa */
     @media (max-width: 768px) {
-      .menu-toggle {
-        display: block;
-      }
+      .menu-toggle { display: block; }
+      .nav-wrapper { justify-content: flex-end; }
       .nav-links {
         display: none;
         position: absolute;
         top: 56px;
         left: 0;
         width: 100%;
-        background: #111;
+        background: var(--color-primario);
         flex-direction: column;
         align-items: center;
         padding: 20px 0;
         gap: 20px;
       }
-      .nav-links.open {
-        display: flex;
-      }
+      .nav-links.open { display: flex; }
     }
 
-    /* Contenedor principal */
+    /* CONTENEDOR */
     .container {
       max-width: 1180px;
       margin: 48px auto 60px;
@@ -109,6 +123,7 @@
       gap: 56px;
     }
 
+    /* SECCIONES */
     section {
       background: #fff;
       border-radius: 12px;
@@ -116,22 +131,23 @@
       box-shadow: 0 3px 18px rgba(0, 0, 0, 0.08);
     }
     section h2 {
+      font-family: "Lora", serif;
       font-size: 2.1rem;
-      color: #151570;
+      color: var(--color-primario);
       margin-bottom: 18px;
       font-weight: 700;
-      border-bottom: 3px solid #2a8aff;
+      border-bottom: 3px solid var(--color-acento);
       padding-bottom: 6px;
     }
 
-    .post {
-      margin-bottom: 42px;
-    }
+    /* POSTS */
+    .post { margin-bottom: 42px; }
     .post-title {
+      font-family: "Lora", serif;
       font-size: 1.9rem;
       font-weight: 700;
       margin-bottom: 14px;
-      color: #222;
+      color: var(--color-texto);
     }
     .post img {
       width: 100%;
@@ -142,23 +158,15 @@
       box-shadow: 0 1px 10px rgba(0, 0, 0, 0.12);
       transition: transform 0.3s ease;
     }
-    .post img:hover {
-      transform: scale(1.03);
-    }
-    .post-excerpt {
-      font-size: 1.12rem;
-      color: #444;
-      margin-bottom: 8px;
-    }
+    .post img:hover { transform: scale(1.03); }
+    .post-excerpt { font-size: 1.12rem; color: #444; margin-bottom: 8px; }
     .read-more {
-      color: #2a8aff;
-      font-size: 1.05rem;
-      text-decoration: underline;
-      cursor: pointer;
+      color: var(--color-primario);
       font-weight: 600;
+      text-decoration: underline;
     }
 
-    /* Grid para Conceptos y Formación */
+    /* GRID (Conceptos / Formación) */
     .grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
@@ -169,47 +177,37 @@
       background: #fff;
       border: 1px solid #eee;
       border-radius: 12px;
-      padding: 18px 18px 20px;
+      padding: 18px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
     .card h4 {
+      font-family: "Lora", serif;
       margin: 0 0 8px;
       font-size: 1.2rem;
-      color: #17174c;
+      color: var(--color-primario);
     }
     .card p { margin: 0 0 10px; color: #444; }
-    .card a { color: #2a8aff; font-weight: 600; text-decoration: none; }
-    .card a:hover { text-decoration: underline; color: #0047aa; }
-    @media (min-width: 720px) {
-      .card { grid-column: span 6; }
-    }
-    @media (min-width: 1024px) {
-      .card { grid-column: span 4; }
-    }
+    .card a { color: var(--color-acento); font-weight: 600; text-decoration: none; }
+    .card a:hover { text-decoration: underline; }
 
-    /* Artículos cortos (Actualidad) */
+    @media (min-width: 720px) { .card { grid-column: span 6; } }
+    @media (min-width: 1024px) { .card { grid-column: span 4; } }
+
+    /* ACTUALIDAD */
     .sabias-article {
       margin-bottom: 30px;
       padding-bottom: 20px;
       border-bottom: 1px solid #ddd;
     }
     .sabias-title {
+      font-family: "Lora", serif;
       font-weight: 700;
       font-size: 1.3rem;
-      color: #17174c;
+      color: var(--color-primario);
       margin-bottom: 8px;
     }
-    .sabias-date {
-      font-size: 0.9rem;
-      color: #666;
-      margin-bottom: 10px;
-    }
-    .sabias-text {
-      font-size: 1rem;
-      color: #444;
-    }
 
-    /* Sidebar */
+    /* SIDEBAR */
     .sidebar {
       flex: 1.2;
       min-width: 280px;
@@ -221,66 +219,59 @@
       flex-direction: column;
       gap: 32px;
       font-size: 0.95rem;
-      color: #444;
-      height: fit-content;
     }
     .widget h3 {
+      font-family: "Lora", serif;
       font-size: 1.25rem;
-      color: #0047aa;
+      color: var(--color-primario);
       margin-bottom: 18px;
-      border-bottom: 2px solid #2a8aff;
+      border-bottom: 2px solid var(--color-acento);
       padding-bottom: 6px;
-      font-weight: 700;
     }
     .widget a.profile-link {
       display: flex;
       gap: 12px;
       align-items: center;
       font-weight: 600;
-      color: #2a8aff;
+      color: var(--color-primario);
       text-decoration: none;
       margin-bottom: 10px;
     }
-    .widget a.profile-link:hover { color: #0047aa; }
+    .widget a.profile-link:hover { color: var(--color-acento); }
     .widget a.profile-link img {
-      width: 48px;
-      height: 48px;
-      border-radius: 0;
-      display: block;
+      width: 48px; height: 48px; display: block; border-radius: 0;
     }
-    .widget p.widget-desc { margin-bottom: 16px; }
 
     /* Responsive general */
     @media (max-width: 980px) {
       .container { flex-direction: column; }
-      .main-content { padding-right: 0; margin-bottom: 40px; }
+      .main-content { margin-bottom: 40px; }
       .sidebar { height: auto; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Menú -->
-  <nav class="navbar" role="navigation">
+  <!-- NAV -->
+  <nav class="navbar">
     <div class="nav-container">
       <div class="logo">Juan Carlos Durán</div>
-      <button class="menu-toggle" aria-label="Abrir menú">
-        <i class="fas fa-bars"></i>
-      </button>
-      <ul class="nav-links">
-        <li><a href="#acerca" class="active"><i class="fas fa-user"></i> ACERCA DE</a></li>
-        <li><a href="#articulos"><i class="fas fa-pen-nib"></i> ARTÍCULOS</a></li>
-        <li><a href="#actualidad"><i class="fas fa-newspaper"></i> ACTUALIDAD</a></li>
-        <li><a href="#conceptos"><i class="fas fa-book"></i> CONCEPTOS</a></li>
-        <li><a href="#formacion"><i class="fas fa-graduation-cap"></i> FORMACIÓN</a></li>
-        <li><a href="#contacta"><i class="fas fa-envelope"></i> CONTACTA</a></li>
-      </ul>
+      <button class="menu-toggle"><i class="fas fa-bars"></i></button>
+      <div class="nav-wrapper">
+        <ul class="nav-links">
+          <li><a href="#acerca" class="active"><i class="fas fa-user"></i> ACERCA DE</a></li>
+          <li><a href="#articulos"><i class="fas fa-pen-nib"></i> ARTÍCULOS</a></li>
+          <li><a href="#actualidad"><i class="fas fa-newspaper"></i> ACTUALIDAD</a></li>
+          <li><a href="#conceptos"><i class="fas fa-book"></i> CONCEPTOS</a></li>
+          <li><a href="#formacion"><i class="fas fa-graduation-cap"></i> FORMACIÓN</a></li>
+          <li><a href="#contacta"><i class="fas fa-envelope"></i> CONTACTA</a></li>
+        </ul>
+      </div>
     </div>
   </nav>
 
   <div class="container">
     <main class="main-content">
-      <!-- Acerca de -->
       <section id="acerca">
         <h2>Acerca de mí</h2>
         <p>
@@ -289,7 +280,6 @@
         </p>
       </section>
 
-      <!-- Artículos -->
       <section id="articulos">
         <h2>Artículos</h2>
         <article class="post">
@@ -300,7 +290,6 @@
         </article>
       </section>
 
-      <!-- Actualidad -->
       <section id="actualidad">
         <h2>Actualidad</h2>
         <article class="sabias-article">
@@ -310,7 +299,6 @@
         </article>
       </section>
 
-      <!-- Conceptos -->
       <section id="conceptos">
         <h2>Conceptos</h2>
         <div class="grid">
@@ -322,7 +310,6 @@
         </div>
       </section>
 
-      <!-- Formación -->
       <section id="formacion">
         <h2>Formación</h2>
         <div class="grid">
@@ -334,7 +321,6 @@
         </div>
       </section>
 
-      <!-- Contacta -->
       <section id="contacta">
         <h2>Contacta conmigo</h2>
         <p>¿Te gustaría colaborar, recibir asesoría o conversar sobre innovación y talento?</p>
@@ -346,28 +332,19 @@
       </section>
     </main>
 
-    <!-- Sidebar -->
     <aside class="sidebar">
       <div class="widget">
         <h3>Perfil y redes</h3>
-
-        <!-- LinkedIn -->
         <a href="https://www.linkedin.com/in/tu-perfil" target="_blank" class="profile-link">
           <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn" /> 
           Juan Carlos Durán
         </a>
-        <p class="widget-desc">
-          Sígueme en LinkedIn para conectar y compartir ideas profesionales.
-        </p>
-
-        <!-- Substack -->
+        <p class="widget-desc">Sígueme en LinkedIn para conectar y compartir ideas profesionales.</p>
         <a href="https://tu-substack.substack.com" target="_blank" class="profile-link">
           <img src="https://cdn.worldvectorlogo.com/logos/substack-1.svg" alt="Substack" /> 
-          Alpha & Grid newsletter en Substack
+          Revista en Substack
         </a>
-        <p class="widget-desc">
-          Suscríbete a mi newsletter en Substack para recibir artículos y análisis exclusivos.
-        </p>
+        <p class="widget-desc">Suscríbete a mi revista en Substack para recibir artículos y análisis exclusivos.</p>
       </div>
     </aside>
   </div>
@@ -376,11 +353,9 @@
     // Menú hamburguesa
     const toggle = document.querySelector(".menu-toggle");
     const navLinks = document.querySelector(".nav-links");
-    toggle.addEventListener("click", () => {
-      navLinks.classList.toggle("open");
-    });
+    toggle.addEventListener("click", () => navLinks.classList.toggle("open"));
 
-    // Activar link de menú según scroll
+    // Activar link según scroll
     const sections = document.querySelectorAll("main section");
     const links = document.querySelectorAll(".nav-links a");
     function onScroll() {
@@ -403,11 +378,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
