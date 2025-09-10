@@ -207,7 +207,7 @@
       margin-bottom: 8px;
     }
 
-    /* SIDEBAR */
+    /* SIDEBAR STICKY */
     .sidebar {
       flex: 1.2;
       min-width: 280px;
@@ -219,6 +219,9 @@
       flex-direction: column;
       gap: 32px;
       font-size: 0.95rem;
+      position: sticky;
+      top: 80px; /* para dejar espacio al navbar */
+      align-self: flex-start;
     }
     .widget h3 {
       font-family: "Lora", serif;
@@ -246,7 +249,7 @@
     @media (max-width: 980px) {
       .container { flex-direction: column; }
       .main-content { margin-bottom: 40px; }
-      .sidebar { height: auto; }
+      .sidebar { position: static; } /* en móvil no hace falta sticky */
     }
   </style>
 </head>
@@ -381,5 +384,3 @@
   </script>
 </body>
 </html>
-
-
