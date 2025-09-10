@@ -21,6 +21,11 @@
       background: #111;
       z-index: 100;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+      display: flex;
+      justify-content: center;
+      height: 56px;
+      font-weight: 600;
+      font-size: 1.1rem;
     }
     .navbar ul {
       display: flex;
@@ -29,13 +34,8 @@
       list-style: none;
       margin: 0;
       padding: 0 24px;
-      height: 56px;
       gap: 48px;
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-    .navbar li {
-      margin: 0;
+      height: 56px;
     }
     .navbar a {
       color: #fff;
@@ -50,13 +50,48 @@
       color: #2a8aff;
       border-color: #2a8aff;
     }
+    .logo-section {
+      max-width: 1080px;
+      margin: 32px auto 12px auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 24px;
+    }
+    .logo-section img {
+      max-width: 280px;
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 3px 12px rgba(0, 0, 0, 0.18));
+      border-radius: 8px;
+    }
+    .about-section {
+      max-width: 740px;
+      margin: 12px auto 60px auto;
+      padding: 0 24px;
+    }
+    .about-section h2 {
+      font-size: 2.1rem;
+      color: #151570;
+      margin-bottom: 14px;
+      font-weight: 700;
+      border-bottom: 3px solid #2a8aff;
+      padding-bottom: 6px;
+      max-width: fit-content;
+    }
+    .about-section p {
+      font-size: 1.12rem;
+      color: #222;
+      line-height: 1.55;
+      margin: 0;
+      max-width: 720px;
+    }
     .container {
       max-width: 1180px;
-      margin: 48px auto 60px;
+      margin: 0 auto 60px;
       display: flex;
       gap: 48px;
       padding: 0 24px;
-      min-height: 80vh;
     }
     .main-content {
       flex: 2.5;
@@ -150,6 +185,8 @@
       gap: 32px;
       font-size: 0.95rem;
       color: #444;
+      max-width: 320px;
+      margin: 0 24px 60px 0;
     }
     .widget h3 {
       font-size: 1.25rem;
@@ -214,36 +251,27 @@
       text-decoration: underline;
       color: #0047aa;
     }
-    /* Responsive design */
-    @media (max-width: 980px) {
+    @media (max-width: 800px) {
+      .logo-section,
+      .about-section {
+        max-width: 98vw;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 16px;
+      }
+      .logo-section img {
+        max-width: 100%;
+      }
       .container {
         flex-direction: column;
-        padding: 0 16px 50px;
-        margin: 20px auto 0 auto;
-      }
-      .main-content {
-        padding-right: 0;
-        margin-bottom: 40px;
-        overflow: visible;
+        padding: 0 16px 40px;
       }
       .sidebar {
-        height: auto;
-        padding: 20px 20px;
-        margin-top: 0;
+        max-width: 98vw;
+        margin: 0 0 40px 0;
       }
-      .navbar ul {
-        gap: 28px;
-        height: 48px;
-        font-size: 1rem;
-      }
-      section h2 {
-        font-size: 1.7rem;
-      }
-      .post-title {
-        font-size: 1.6rem;
-      }
-      .sabias-title {
-        font-size: 1.2rem;
+      .about-section {
+        margin-bottom: 40px;
       }
     }
   </style>
@@ -257,16 +285,20 @@
       <li><a href="#contacta">CONTACTA</a></li>
     </ul>
   </nav>
-  <div class="container">
+
+  <div class="logo-section" role="banner" aria-label="Logo Juan Carlos Durán">
+    <img src="https://pplx-res.cloudinary.com/image/upload/v1757497915/gemini_images/hdakffewv7wjoqpkjfbx.png" alt="Logo Juan Carlos Durán" />
+  </div>
+
+  <section class="about-section" id="acerca" tabindex="-1">
+    <h2>Acerca de mí</h2>
+    <p>
+      Soy Juan Carlos Durán, apasionado por la tecnología, la inteligencia artificial, los mercados financieros y la energía. En este espacio comparto análisis, ideas y recursos para potenciar el crecimiento profesional y personal.
+    </p>
+  </section>
+
+  <div class="container" role="main">
     <main class="main-content">
-      <!-- Acerca de -->
-      <section id="acerca" tabindex="-1">
-        <h2>Acerca de mí</h2>
-        <p>
-          Soy Juan Carlos Durán, apasionado por la tecnología, la inteligencia artificial, los mercados financieros y la energía. En este espacio comparto análisis, ideas y recursos para potenciar el crecimiento profesional y personal.
-        </p>
-      </section>
-      <!-- Artículos Destacados -->
       <section id="articulos" tabindex="-1">
         <h2>Artículos Destacados</h2>
         <article class="post">
@@ -294,7 +326,6 @@
           <a href="#" class="read-more">Leer más...</a>
         </article>
       </section>
-      <!-- Observatorio -->
       <section id="observatorio" tabindex="-1">
         <h2>Observatorio</h2>
         <article class="sabias-article">
@@ -319,7 +350,6 @@
           </p>
         </article>
       </section>
-      <!-- Contacta -->
       <section id="contacta" tabindex="-1">
         <h2>Contacta conmigo</h2>
         <p>
@@ -388,3 +418,4 @@
   </script>
 </body>
 </html>
+
