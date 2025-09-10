@@ -18,60 +18,63 @@
       width: 100%;
       position: sticky;
       top: 0;
-      background: #111;
+      background: #121212;
       z-index: 100;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
       display: flex;
       align-items: center;
-      padding: 0 24px;
-      gap: 40px;
-      height: 56px;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 90px;
+      font-weight: 600;
     }
     .logo-container {
       display: flex;
       align-items: center;
       cursor: pointer;
+      gap: 16px;
     }
     .logo-container img {
-      height: 48px;
+      height: 80px;
       width: auto;
       display: block;
+      filter: drop-shadow(0 0 4px rgba(255,255,255,0.5));
     }
     .navbar ul {
       display: flex;
-      justify-content: center;
-      align-items: center;
       list-style: none;
       margin: 0;
       padding: 0;
       gap: 48px;
-      font-weight: 600;
-      font-size: 1.1rem;
-      flex-grow: 1;
+      font-size: 1.15rem;
     }
     .navbar li {
       margin: 0;
     }
     .navbar a {
-      color: #fff;
+      color: #eee;
       text-decoration: none;
       padding-bottom: 6px;
       border-bottom: 2px solid transparent;
       transition: border-color 0.25s, color 0.25s;
       cursor: pointer;
+      font-weight: 600;
     }
     .navbar a:hover,
     .navbar a.active {
-      color: #2a8aff;
-      border-color: #2a8aff;
+      color: #66aaff;
+      border-color: #66aaff;
     }
     .container {
       max-width: 1180px;
-      margin: 48px auto 60px;
+      margin: 60px auto 60px;
       display: flex;
       gap: 48px;
       padding: 0 24px;
       min-height: 80vh;
+      background: #fcfcfc;
+      border-radius: 12px;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.08);
     }
     .main-content {
       flex: 2.5;
@@ -266,7 +269,7 @@
 <body>
   <nav class="navbar" role="navigation" aria-label="Menú principal">
     <div class="logo-container" tabindex="0">
-      <img src="https://pplx-res.cloudinary.com/image/upload/v1757495169/gemini_images/crhl45okuedtfelzj0gy.png" alt="Logo Juan Carlos Durán" />
+      <img src="https://cdn.discordapp.com/attachments/1140452143569974834/1144119957881323028/image.jpg" alt="Logo Juan Carlos Durán" />
     </div>
     <ul>
       <li><a href="#acerca" class="active">ACERCA DE</a></li>
