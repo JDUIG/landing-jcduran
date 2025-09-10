@@ -228,9 +228,14 @@
   </style>
 </head>
 <body>
-  <!-- Menú -->
-  <nav class="navbar">
-    <ul>
+  <!-- Menú con hamburguesa -->
+<nav class="navbar" role="navigation" aria-label="Menú principal">
+  <div class="nav-container">
+    <div class="logo">Juan Carlos Durán</div>
+    <button class="menu-toggle" aria-label="Abrir menú">
+      <i class="fas fa-bars"></i>
+    </button>
+    <ul class="nav-links">
       <li><a href="#acerca" class="active"><i class="fas fa-user"></i> ACERCA DE</a></li>
       <li><a href="#articulos"><i class="fas fa-pen-nib"></i> ARTÍCULOS</a></li>
       <li><a href="#actualidad"><i class="fas fa-newspaper"></i> ACTUALIDAD</a></li>
@@ -238,7 +243,8 @@
       <li><a href="#formacion"><i class="fas fa-graduation-cap"></i> FORMACIÓN</a></li>
       <li><a href="#contacta"><i class="fas fa-envelope"></i> CONTACTA</a></li>
     </ul>
-  </nav>
+  </div>
+</nav>
 
   <div class="container">
     <main class="main-content">
@@ -353,6 +359,7 @@
   </script>
 </body>
 </html>
+
 
 
 
