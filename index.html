@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Juan Carlos Durán - Blog</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Juan Carlos Durán - Blog Personal</title>
   <style>
     body {
       font-family: "Segoe UI", Arial, sans-serif;
       margin: 0;
       background: #fcfcfc;
       color: #222;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
     .navbar {
       width: 100%;
@@ -17,203 +20,380 @@
       top: 0;
       background: #111;
       z-index: 100;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
     }
     .navbar ul {
       display: flex;
+      justify-content: center;
       align-items: center;
       list-style: none;
       margin: 0;
-      padding: 0 20px;
-      height: 52px;
+      padding: 0 24px;
+      height: 56px;
+      gap: 48px;
+      font-weight: 600;
+      font-size: 1.1rem;
     }
     .navbar li {
-      margin-right: 34px;
+      margin: 0;
     }
     .navbar a {
       color: #fff;
       text-decoration: none;
-      font-weight: 500;
-      font-size: 1rem;
-      transition: color .2s;
-      padding: 0;
+      padding-bottom: 6px;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.25s, color 0.25s;
+      cursor: pointer;
     }
-    .navbar a:hover {
+    .navbar a:hover,
+    .navbar a.active {
       color: #2a8aff;
+      border-color: #2a8aff;
     }
     .container {
-      max-width: 1150px;
-      margin: 36px auto 0 auto;
+      max-width: 1180px;
+      margin: 48px auto 60px;
       display: flex;
-      gap: 38px;
-      padding: 0 16px 40px 16px;
-      height: 80vh;
+      gap: 48px;
+      padding: 0 24px;
+      min-height: 80vh;
     }
     .main-content {
-      flex: 3;
+      flex: 2.5;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 56px;
       overflow-y: auto;
-      padding-right: 10px;
+      padding-right: 12px;
     }
-    .sidebar {
-      flex: 1.1;
-      min-width: 260px;
-      background: #fafafa;
+    section {
+      background: #fff;
       border-radius: 12px;
-      padding: 24px 22px;
-      box-shadow: 0 4px 28px rgba(0,0,0,0.05);
-      height: 80vh;
-      overflow-y: auto;
-      margin-top: 10px;
+      padding: 28px 28px 36px;
+      box-shadow: 0 3px 18px rgba(0, 0, 0, 0.08);
+    }
+    section h2 {
+      font-size: 2.1rem;
+      color: #151570;
+      margin-bottom: 18px;
+      font-weight: 700;
+      border-bottom: 3px solid #2a8aff;
+      padding-bottom: 6px;
     }
     .post {
-      margin-bottom: 54px;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 2px 12px rgba(0,0,0,.07);
-      padding: 28px 22px;
-      transition: box-shadow .2s;
-    }
-    .post:hover {
-      box-shadow: 0 8px 32px rgba(0,0,0,.11);
+      margin-bottom: 42px;
     }
     .post-title {
-      font-size: 2.2rem;
+      font-size: 1.9rem;
       font-weight: 700;
-      margin-bottom: 12px;
-      color: #161674;
+      margin-bottom: 14px;
+      color: #222;
     }
     .post img {
       width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 1px 8px rgba(0,0,0,0.09);
-      margin-bottom: 14px;
-      object-fit: cover;
       height: 340px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 0 1px 10px rgba(0, 0, 0, 0.12);
+      margin-bottom: 12px;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .post img:hover {
+      transform: scale(1.03);
     }
     .post-excerpt {
-      font-size: 1.11rem;
+      font-size: 1.12rem;
       color: #444;
-      margin-bottom: 11px;
-      line-height: 1.6;
+      margin-bottom: 8px;
+      line-height: 1.55;
     }
     .read-more {
       color: #2a8aff;
-      font-size: 1rem;
+      font-size: 1.05rem;
       text-decoration: underline;
-    }
-    .sidebar h4 {
-      margin-bottom: 16px;
-      font-size: 1.17rem;
-      color: #0047ab;
-      border-bottom: 2px solid #2a8aff;
-      padding-bottom: 6px;
-    }
-    .sidebar .widget {
-      margin-bottom: 32px;
-    }
-    .sidebar .widget img {
-      border-radius: 50%;
-      width: 48px;
-      vertical-align: middle;
-      margin-right: 12px;
-    }
-    .sidebar .widget a {
-      color: #2a8aff;
+      cursor: pointer;
       font-weight: 600;
-      text-decoration:none;
-      display: inline-flex;
-      align-items: center;
-      margin-bottom: 6px;
     }
-    .sidebar .widget a:hover {
-      text-decoration: underline;
+    .sabias-article {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #ddd;
     }
-    .sidebar .widget ul {
-      padding-left: 18px;
-      margin: 10px 0 0 0;
-    }
-    .sidebar .widget ul li {
+    .sabias-title {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #17174c;
       margin-bottom: 8px;
-      font-size: 0.95rem;
     }
-    .sidebar .widget p {
+    .sabias-date {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 10px;
+    }
+    .sabias-text {
+      font-size: 1rem;
+      color: #444;
+      line-height: 1.5;
+    }
+    .sidebar {
+      flex: 1.2;
+      min-width: 280px;
+      background: #fafafa;
+      border-radius: 12px;
+      padding: 28px 26px;
+      box-shadow: 0 4px 28px rgba(0, 0, 0, 0.06);
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
       font-size: 0.95rem;
       color: #444;
-      margin-top: 4px;
-      margin-bottom: 12px;
     }
-    @media (max-width: 900px) {
-      .container { flex-direction: column; height: auto; }
-      .sidebar { margin-top: 35px; height: auto; }
-      .main-content { padding-right: 0; height: auto; }
+    .widget h3 {
+      font-size: 1.25rem;
+      color: #0047aa;
+      margin-bottom: 18px;
+      border-bottom: 2px solid #2a8aff;
+      padding-bottom: 6px;
+      font-weight: 700;
+    }
+    .widget a.profile-link {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      font-weight: 600;
+      color: #2a8aff;
+      text-decoration: none;
+      margin-bottom: 10px;
+      transition: color 0.3s;
+    }
+    .widget a.profile-link:hover {
+      color: #0047aa;
+    }
+    .widget a.profile-link img {
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
+    }
+    .widget p.widget-desc {
+      margin-bottom: 16px;
+      color: #555;
+      line-height: 1.4;
+    }
+    .widget a.widget-link {
+      color: #ff671f;
+      font-weight: 700;
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 12px;
+      transition: color 0.3s;
+      font-size: 1rem;
+    }
+    .widget a.widget-link:hover {
+      color: #e05e00;
+      text-decoration: underline;
+    }
+    .widget ul.widget-list {
+      padding-left: 18px;
+      margin: 10px 0 0 0;
+      list-style: disc;
+    }
+    .widget ul.widget-list li {
+      margin-bottom: 9px;
+    }
+    .widget ul.widget-list li a {
+      color: #2a8aff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .widget ul.widget-list li a:hover {
+      text-decoration: underline;
+      color: #0047aa;
+    }
+    /* Responsive design */
+    @media (max-width: 980px) {
+      .container {
+        flex-direction: column;
+        padding: 0 16px 50px;
+        margin: 20px auto 0 auto;
+      }
+      .main-content {
+        padding-right: 0;
+        margin-bottom: 40px;
+        overflow: visible;
+      }
+      .sidebar {
+        height: auto;
+        padding: 20px 20px;
+        margin-top: 0;
+      }
+      .navbar ul {
+        gap: 28px;
+        height: 48px;
+        font-size: 1rem;
+      }
+      section h2 {
+        font-size: 1.7rem;
+      }
+      .post-title {
+        font-size: 1.6rem;
+      }
+      .sabias-title {
+        font-size: 1.2rem;
+      }
     }
   </style>
 </head>
 <body>
-<nav class="navbar">
-  <ul>
-    <li><a href="#">SOBRE MI</a></li>
-    <li><a href="#">ARTÍCULOS</a></li>
-    <li><a href="#">CONTACTO</a></li>
-  </ul>
-</nav>
-<div class="container">
-  <div class="main-content">
-    <div class="post">
-      <div class="post-title">El Futuro de la Energía Renovable</div>
-      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Energía Renovable" />
-      <div class="post-excerpt">
-        Exploramos las tendencias recientes en energías limpias y su impacto en la sostenibilidad global.
+  <nav class="navbar">
+    <ul>
+      <li><a href="#acerca" class="active">ACERCA DE</a></li>
+      <li><a href="#articulos">ARTÍCULOS DESTACADOS</a></li>
+      <li><a href="#observatorio">OBSERVATORIO</a></li>
+      <li><a href="#contacta">CONTACTA</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+    <main class="main-content">
+      <!-- Acerca de -->
+      <section id="acerca" tabindex="-1">
+        <h2>Acerca de mí</h2>
+        <p>
+          Soy Juan Carlos Durán, apasionado por la tecnología, la inteligencia artificial, los mercados financieros y la energía. En este espacio comparto análisis, ideas y recursos para potenciar el crecimiento profesional y personal.
+        </p>
+      </section>
+
+      <!-- Artículos Destacados -->
+      <section id="articulos" tabindex="-1">
+        <h2>Artículos Destacados</h2>
+        <article class="post">
+          <h3 class="post-title">El Futuro de la Energía Renovable</h3>
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Energía Renovable" />
+          <p class="post-excerpt">
+            Exploramos las tendencias recientes en energías limpias y su impacto en la sostenibilidad global.
+          </p>
+          <a href="#" class="read-more">Leer más...</a>
+        </article>
+        <article class="post">
+          <h3 class="post-title">Mercados Financieros en Transformación</h3>
+          <img src="https://images.unsplash.com/photo-1554224154-22dec7ec8818?auto=format&fit=crop&w=800&q=80" alt="Mercados Financieros" />
+          <p class="post-excerpt">
+            Análisis profundo sobre la evolución del mercado financiero mundial y nuevas oportunidades de inversión.
+          </p>
+          <a href="#" class="read-more">Leer más...</a>
+        </article>
+        <article class="post">
+          <h3 class="post-title">Inteligencia Artificial en la Industria</h3>
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Inteligencia Artificial" />
+          <p class="post-excerpt">
+            Descubre cómo la IA está revolucionando procesos industriales, desde la automatización hasta la toma de decisiones.
+          </p>
+          <a href="#" class="read-more">Leer más...</a>
+        </article>
+      </section>
+
+      <!-- Observatorio -->
+      <section id="observatorio" tabindex="-1">
+        <h2>Observatorio</h2>
+        <article class="sabias-article">
+          <h3 class="sabias-title">¿Sabías que blockchain revoluciona las finanzas?</h3>
+          <time class="sabias-date" datetime="2025-09-10">10 septiembre 2025</time>
+          <p class="sabias-text">
+            El concepto de <strong>blockchain</strong> permite registrar transacciones de forma segura, transparente y descentralizada, impactando en la digitalización financiera.
+          </p>
+        </article>
+        <article class="sabias-article">
+          <h3 class="sabias-title">Eficiencia energética para combatir el cambio climático</h3>
+          <time class="sabias-date" datetime="2025-09-10">10 septiembre 2025</time>
+          <p class="sabias-text">
+            Mejorar la eficiencia en el consumo energético es clave para reducir emisiones y ahorrar costos empresariales, siendo estratégica para un futuro sostenible.
+          </p>
+        </article>
+        <article class="sabias-article">
+          <h3 class="sabias-title">Machine learning y predicción de mercados</h3>
+          <time class="sabias-date" datetime="2025-09-10">10 septiembre 2025</time>
+          <p class="sabias-text">
+            Los modelos de <strong>machine learning</strong> analizan grandes datos para prever tendencias de mercado e influir en decisiones empresariales.
+          </p>
+        </article>
+      </section>
+
+      <!-- Contacta -->
+      <section id="contacta" tabindex="-1">
+        <h2>Contacta conmigo</h2>
+        <p>
+          ¿Te gustaría colaborar, recibir asesoría o simplemente conversar sobre innovación y talento?
+          <br /><br />
+          <a href="mailto:juan@example.com" class="read-more">Envíame un correo</a>
+        </p>
+      </section>
+    </main>
+
+    <aside class="sidebar" aria-label="Barra lateral con perfil y publicaciones">
+      <div class="widget">
+        <h3>Perfil y redes</h3>
+        <a href="https://www.linkedin.com/in/tu-perfil" target="_blank" rel="noopener noreferrer" class="profile-link">
+          <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn logo" />
+          Juan Carlos Durán
+        </a>
+        <p class="widget-desc">
+          Sígueme en LinkedIn para conectar y compartir ideas profesionales.
+        </p>
+        <a href="https://tu-substack.substack.com" target="_blank" rel="noopener noreferrer" class="widget-link">
+          Newsletter en Substack
+        </a>
+        <p class="widget-desc">
+          Recibe análisis exclusivos y novedades directas en tu correo.
+        </p>
       </div>
-      <a href="#" class="read-more">Leer más...</a>
-    </div>
-    <div class="post">
-      <div class="post-title">Mercados Financieros en Transformación</div>
-      <img src="https://images.unsplash.com/photo-1554224154-22dec7ec8818?auto=format&fit=crop&w=800&q=80" alt="Mercados Financieros" />
-      <div class="post-excerpt">
-        Análisis profundo sobre la evolución del mercado financiero mundial y nuevas oportunidades de inversión.
+
+      <div class="widget">
+        <h3>Artículos en LinkedIn</h3>
+        <ul class="widget-list">
+          <li><a href="https://www.linkedin.com/pulse/tu-post-1" target="_blank" rel="noopener noreferrer">Blockchain y su potencial en finanzas</a></li>
+          <li><a href="https://www.linkedin.com/pulse/tu-post-2" target="_blank" rel="noopener noreferrer">Claves de la energía renovable hoy</a></li>
+          <li><a href="https://www.linkedin.com/pulse/tu-post-3" target="_blank" rel="noopener noreferrer">Inteligencia artificial: mitos y realidades</a></li>
+        </ul>
       </div>
-      <a href="#" class="read-more">Leer más...</a>
-    </div>
-    <div class="post">
-      <div class="post-title">Inteligencia Artificial y su Rol en la Industria</div>
-      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Inteligencia Artificial" />
-      <div class="post-excerpt">
-        Descubre cómo la IA está revolucionando procesos industriales, desde la automatización hasta la toma de decisiones.
+
+      <div class="widget">
+        <h3>Boletín en Substack</h3>
+        <ul class="widget-list">
+          <li><a href="https://tu-substack.substack.com/p/entrada-1" target="_blank" rel="noopener noreferrer">El futuro de los algoritmos financieros</a></li>
+          <li><a href="https://tu-substack.substack.com/p/entrada-2" target="_blank" rel="noopener noreferrer">Cómo apostar por la eficiencia energética</a></li>
+          <li><a href="https://tu-substack.substack.com/p/entrada-3" target="_blank" rel="noopener noreferrer">Tendencias en aprendizaje automático</a></li>
+        </ul>
       </div>
-      <a href="#" class="read-more">Leer más...</a>
-    </div>
-    <!-- Agrega más artículos aquí -->
+    </aside>
   </div>
-  <div class="sidebar">
-    <div class="widget">
-      <h4>Sobre Juan Carlos Durán</h4>
-      <p>Apasionado por la tecnología, la inteligencia artificial y los mercados. Aquí comparto análisis y novedades.</p>
-    </div>
-    <div class="widget">
-      <h4>LinkedIn</h4>
-      <a href="https://www.linkedin.com/in/tu-perfil" target="_blank" rel="noopener noreferrer">
-        <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn logo" />
-        Juan Carlos Durán
-      </a>
-      <ul>
-        <li><a href="https://www.linkedin.com/pulse/tu-post-1" target="_blank">Título del post en LinkedIn 1</a></li>
-        <li><a href="https://www.linkedin.com/pulse/tu-post-2" target="_blank">Título del post en LinkedIn 2</a></li>
-        <li><a href="https://www.linkedin.com/pulse/tu-post-3" target="_blank">Título del post en LinkedIn 3</a></li>
-      </ul>
-    </div>
-    <div class="widget">
-      <h4>Substack</h4>
-      <a href="https://tu-substack.substack.com" target="_blank" rel="noopener noreferrer" style="color:#ff671f; font-weight:700; text-decoration:none;">
-        Suscríbete a mi newsletter en Substack
-      </a>
-      <ul>
-        <li><a href="https://tu-substack.substack.com/p/entrada-1" target="_blank">Entrada del boletín 1</a></li>
-        <li><a href="https://tu-substack.substack.com/p/entrada-2" target="_blank">Entrada del boletín 2</a></li>
-        <li><a href="https://tu-substack.substack.com/p/entrada-3" target="_blank">Entrada del boletín 3</a></li>
-      </ul>
-    </div>
-  </div>
-</div>
+
+  <script>
+    // Script to toggle active nav link based on scroll position
+    const sections = document.querySelectorAll("main section");
+    const navLinks = document.querySelectorAll(".navbar a");
+
+    function onScroll() {
+      let scrollPos = window.scrollY || document.documentElement.scrollTop;
+      sections.forEach((section) => {
+        if (
+          scrollPos >= section.offsetTop - 60 &&
+          scrollPos < section.offsetTop + section.offsetHeight - 60
+        ) {
+          navLinks.forEach((link) => {
+            link.classList.remove("active");
+            if (link.getAttribute("href").substring(1) === section.id) {
+              link.classList.add("active");
+            }
+          });
+        }
+      });
+    }
+
+    window.addEventListener("scroll", onScroll);
+  </script>
 </body>
 </html>
-
