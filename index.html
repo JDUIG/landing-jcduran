@@ -21,11 +21,6 @@
       background: #111;
       z-index: 100;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
-      display: flex;
-      justify-content: center;
-      height: 56px;
-      font-weight: 600;
-      font-size: 1.1rem;
     }
     .navbar ul {
       display: flex;
@@ -34,8 +29,11 @@
       list-style: none;
       margin: 0;
       padding: 0 24px;
-      gap: 48px;
       height: 56px;
+      gap: 36px; /* un poco menos para más items */
+      font-weight: 600;
+      font-size: 1.05rem;
+      flex-wrap: wrap;
     }
     .navbar a {
       color: #fff;
@@ -50,48 +48,13 @@
       color: #2a8aff;
       border-color: #2a8aff;
     }
-    .logo-section {
-      max-width: 1080px;
-      margin: 32px auto 12px auto;
-      padding: 0 24px;
-      display: flex;
-      align-items: flex-start;
-      gap: 24px;
-    }
-    .logo-section img {
-      max-width: 280px;
-      width: 100%;
-      height: auto;
-      filter: drop-shadow(0 3px 12px rgba(0, 0, 0, 0.18));
-      border-radius: 8px;
-    }
-    .about-section {
-      max-width: 740px;
-      margin: 12px auto 60px auto;
-      padding: 0 24px;
-    }
-    .about-section h2 {
-      font-size: 2.1rem;
-      color: #151570;
-      margin-bottom: 14px;
-      font-weight: 700;
-      border-bottom: 3px solid #2a8aff;
-      padding-bottom: 6px;
-      max-width: fit-content;
-    }
-    .about-section p {
-      font-size: 1.12rem;
-      color: #222;
-      line-height: 1.55;
-      margin: 0;
-      max-width: 720px;
-    }
     .container {
       max-width: 1180px;
-      margin: 0 auto 60px;
+      margin: 48px auto 60px;
       display: flex;
       gap: 48px;
       padding: 0 24px;
+      min-height: 80vh;
     }
     .main-content {
       flex: 2.5;
@@ -116,9 +79,7 @@
       border-bottom: 3px solid #2a8aff;
       padding-bottom: 6px;
     }
-    .post {
-      margin-bottom: 42px;
-    }
+    .post { margin-bottom: 42px; }
     .post-title {
       font-size: 1.9rem;
       font-weight: 700;
@@ -135,9 +96,7 @@
       transition: transform 0.3s ease;
       cursor: pointer;
     }
-    .post img:hover {
-      transform: scale(1.03);
-    }
+    .post img:hover { transform: scale(1.03); }
     .post-excerpt {
       font-size: 1.12rem;
       color: #444;
@@ -151,6 +110,35 @@
       cursor: pointer;
       font-weight: 600;
     }
+    /* Cards sencillas para Aprender/Formación */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+    .card {
+      grid-column: span 12;
+      background: #fff;
+      border: 1px solid #eee;
+      border-radius: 12px;
+      padding: 18px 18px 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .card h4 {
+      margin: 0 0 8px;
+      font-size: 1.2rem;
+      color: #17174c;
+    }
+    .card p { margin: 0 0 10px; color: #444; }
+    .card a { color: #2a8aff; font-weight: 600; text-decoration: none; }
+    .card a:hover { text-decoration: underline; color: #0047aa; }
+    @media (min-width: 720px) {
+      .card { grid-column: span 6; }
+    }
+    @media (min-width: 1024px) {
+      .card { grid-column: span 4; }
+    }
+
     .sabias-article {
       margin-bottom: 30px;
       padding-bottom: 20px;
@@ -172,6 +160,7 @@
       color: #444;
       line-height: 1.5;
     }
+
     .sidebar {
       flex: 1.2;
       min-width: 280px;
@@ -185,8 +174,6 @@
       gap: 32px;
       font-size: 0.95rem;
       color: #444;
-      max-width: 320px;
-      margin: 0 24px 60px 0;
     }
     .widget h3 {
       font-size: 1.25rem;
@@ -206,9 +193,7 @@
       margin-bottom: 10px;
       transition: color 0.3s;
     }
-    .widget a.profile-link:hover {
-      color: #0047aa;
-    }
+    .widget a.profile-link:hover { color: #0047aa; }
     .widget a.profile-link img {
       border-radius: 50%;
       width: 48px;
@@ -216,63 +201,30 @@
       object-fit: cover;
       box-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
     }
-    .widget p.widget-desc {
-      margin-bottom: 16px;
-      color: #555;
-      line-height: 1.4;
-    }
+    .widget p.widget-desc { margin-bottom: 16px; color: #555; line-height: 1.4; }
     .widget a.widget-link {
-      color: #ff671f;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-block;
-      margin-bottom: 12px;
-      transition: color 0.3s;
-      font-size: 1rem;
+      color: #ff671f; font-weight: 700; text-decoration: none; display: inline-block;
+      margin-bottom: 12px; transition: color 0.3s; font-size: 1rem;
     }
-    .widget a.widget-link:hover {
-      color: #e05e00;
-      text-decoration: underline;
-    }
-    .widget ul.widget-list {
-      padding-left: 18px;
-      margin: 10px 0 0 0;
-      list-style: disc;
-    }
-    .widget ul.widget-list li {
-      margin-bottom: 9px;
-    }
-    .widget ul.widget-list li a {
-      color: #2a8aff;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .widget ul.widget-list li a:hover {
-      text-decoration: underline;
-      color: #0047aa;
-    }
-    @media (max-width: 800px) {
-      .logo-section,
-      .about-section {
-        max-width: 98vw;
-        margin-left: auto;
-        margin-right: auto;
-        padding: 0 16px;
-      }
-      .logo-section img {
-        max-width: 100%;
-      }
+    .widget a.widget-link:hover { color: #e05e00; text-decoration: underline; }
+    .widget ul.widget-list { padding-left: 18px; margin: 10px 0 0 0; list-style: disc; }
+    .widget ul.widget-list li { margin-bottom: 9px; }
+    .widget ul.widget-list li a { color: #2a8aff; text-decoration: none; font-weight: 600; }
+    .widget ul.widget-list li a:hover { text-decoration: underline; color: #0047aa; }
+
+    /* Responsive */
+    @media (max-width: 980px) {
       .container {
         flex-direction: column;
-        padding: 0 16px 40px;
+        padding: 0 16px 50px;
+        margin: 20px auto 0 auto;
       }
-      .sidebar {
-        max-width: 98vw;
-        margin: 0 0 40px 0;
-      }
-      .about-section {
-        margin-bottom: 40px;
-      }
+      .main-content { padding-right: 0; margin-bottom: 40px; overflow: visible; }
+      .sidebar { height: auto; padding: 20px 20px; margin-top: 0; }
+      .navbar ul { gap: 20px; height: 52px; font-size: 0.98rem; }
+      section h2 { font-size: 1.7rem; }
+      .post-title { font-size: 1.6rem; }
+      .sabias-title { font-size: 1.2rem; }
     }
   </style>
 </head>
@@ -280,27 +232,72 @@
   <nav class="navbar" role="navigation" aria-label="Menú principal">
     <ul>
       <li><a href="#acerca" class="active">ACERCA DE</a></li>
-      <li><a href="#articulos">ARTÍCULOS DESTACADOS</a></li>
-      <li><a href="#observatorio">OBSERVATORIO</a></li>
+      <li><a href="#aprender">APRENDER</a></li>
+      <li><a href="#formacion">FORMACIÓN</a></li>
+      <li><a href="#articulos">ARTÍCULOS</a></li>
+      <li><a href="#actualidad">ACTUALIDAD</a></li>
       <li><a href="#contacta">CONTACTA</a></li>
     </ul>
   </nav>
 
-  <div class="logo-section" role="banner" aria-label="Logo Juan Carlos Durán">
-    <img src="https://pplx-res.cloudinary.com/image/upload/v1757497915/gemini_images/hdakffewv7wjoqpkjfbx.png" alt="Logo Juan Carlos Durán" />
-  </div>
-
-  <section class="about-section" id="acerca" tabindex="-1">
-    <h2>Acerca de mí</h2>
-    <p>
-      Soy Juan Carlos Durán, apasionado por la tecnología, la inteligencia artificial, los mercados financieros y la energía. En este espacio comparto análisis, ideas y recursos para potenciar el crecimiento profesional y personal.
-    </p>
-  </section>
-
-  <div class="container" role="main">
+  <div class="container">
     <main class="main-content">
+      <!-- Acerca de -->
+      <section id="acerca" tabindex="-1">
+        <h2>Acerca de mí</h2>
+        <p>
+          Soy Juan Carlos Durán, apasionado por la tecnología, la inteligencia artificial, los mercados financieros y la energía.
+          En este espacio comparto análisis, ideas y recursos para potenciar el crecimiento profesional y personal.
+        </p>
+      </section>
+
+      <!-- Aprender (conceptos teóricos y mini-lecturas) -->
+      <section id="aprender" tabindex="-1" aria-label="Aprender: conceptos teóricos y mini-lecturas">
+        <h2>Aprender</h2>
+        <div class="grid">
+          <article class="card">
+            <h4>Qué es el <em>basis</em> en commodities</h4>
+            <p>Relación entre precio spot y precio de futuros; por qué importa para coberturas y logística.</p>
+            <a href="#">Leer explicación</a>
+          </article>
+          <article class="card">
+            <h4>Curvas forward: contango vs backwardation</h4>
+            <p>Cómo leer la estructura temporal y qué dice sobre inventarios y expectativas.</p>
+            <a href="#">Ver ejemplo práctico</a>
+          </article>
+          <article class="card">
+            <h4>Fundamentos de <em>machine learning</em> aplicado a energía</h4>
+            <p>Series temporales, features climáticas y validación robusta para precios de gas y electricidad.</p>
+            <a href="#">Introducción rápida</a>
+          </article>
+        </div>
+      </section>
+
+      <!-- Formación (recursos, guías, plantillas, cursos) -->
+      <section id="formacion" tabindex="-1" aria-label="Formación: recursos y guías">
+        <h2>Formación</h2>
+        <div class="grid">
+          <article class="card">
+            <h4>Guía: Coberturas básicas con futuros</h4>
+            <p>Paso a paso con ejemplos y hoja de cálculo descargable.</p>
+            <a href="#">Abrir guía</a>
+          </article>
+          <article class="card">
+            <h4>Plantilla P&L diario para trading físico</h4>
+            <p>Modelo simple para seguimiento de posiciones y riesgos.</p>
+            <a href="#">Descargar plantilla</a>
+          </article>
+          <article class="card">
+            <h4>Mini-curso: Introducción a IA para analistas</h4>
+            <p>4 lecciones, datasets de ejemplo y evaluación.</p>
+            <a href="#">Empezar curso</a>
+          </article>
+        </div>
+      </section>
+
+      <!-- Artículos (antes: Artículos destacados) -->
       <section id="articulos" tabindex="-1">
-        <h2>Artículos Destacados</h2>
+        <h2>Artículos</h2>
         <article class="post">
           <h3 class="post-title">El Futuro de la Energía Renovable</h3>
           <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Energía Renovable" />
@@ -326,30 +323,35 @@
           <a href="#" class="read-more">Leer más...</a>
         </article>
       </section>
-      <section id="observatorio" tabindex="-1">
-        <h2>Observatorio</h2>
+
+      <!-- Actualidad (antes: Observatorio) -->
+      <section id="actualidad" tabindex="-1">
+        <h2>Actualidad</h2>
+        <!-- Aquí puedes enlazar prensa/curación con fuente y fecha -->
         <article class="sabias-article">
-          <h3 class="sabias-title">¿Sabías que blockchain revoluciona las finanzas?</h3>
+          <h3 class="sabias-title">Blockchain acelera la tokenización de activos</h3>
           <time class="sabias-date" datetime="2025-09-10">10 septiembre 2025</time>
           <p class="sabias-text">
-            El concepto de <strong>blockchain</strong> permite registrar transacciones de forma segura, transparente y descentralizada, impactando en la digitalización financiera.
+            Selección de prensa: impacto de la tokenización en mercados financieros. <a href="#" rel="noopener">Fuente</a>.
           </p>
         </article>
         <article class="sabias-article">
-          <h3 class="sabias-title">Eficiencia energética para combatir el cambio climático</h3>
+          <h3 class="sabias-title">Eficiencia energética y objetivos de emisiones</h3>
           <time class="sabias-date" datetime="2025-09-10">10 septiembre 2025</time>
           <p class="sabias-text">
-            Mejorar la eficiencia en el consumo energético es clave para reducir emisiones y ahorrar costos empresariales, siendo estratégica para un futuro sostenible.
+            Reportajes recientes sobre ahorro energético y políticas europeas. <a href="#" rel="noopener">Fuente</a>.
           </p>
         </article>
         <article class="sabias-article">
-          <h3 class="sabias-title">Machine learning y predicción de mercados</h3>
+          <h3 class="sabias-title">ML para previsión de demanda eléctrica</h3>
           <time class="sabias-date" datetime="2025-09-10">10 septiembre 2025</time>
           <p class="sabias-text">
-            Los modelos de <strong>machine learning</strong> analizan grandes datos para prever tendencias de mercado e influir en decisiones empresariales.
+            Estudios aplicados a predicción y balance de red. <a href="#" rel="noopener">Fuente</a>.
           </p>
         </article>
       </section>
+
+      <!-- Contacta -->
       <section id="contacta" tabindex="-1">
         <h2>Contacta conmigo</h2>
         <p>
@@ -359,6 +361,7 @@
         </p>
       </section>
     </main>
+
     <aside class="sidebar" aria-label="Barra lateral con perfil y publicaciones">
       <div class="widget">
         <h3>Perfil y redes</h3>
@@ -376,6 +379,7 @@
           Recibe análisis exclusivos y novedades directas en tu correo.
         </p>
       </div>
+
       <div class="widget">
         <h3>Artículos en LinkedIn</h3>
         <ul class="widget-list">
@@ -384,6 +388,7 @@
           <li><a href="https://www.linkedin.com/pulse/tu-post-3" target="_blank" rel="noopener noreferrer">Inteligencia artificial: mitos y realidades</a></li>
         </ul>
       </div>
+
       <div class="widget">
         <h3>Boletín en Substack</h3>
         <ul class="widget-list">
@@ -394,8 +399,9 @@
       </div>
     </aside>
   </div>
+
   <script>
-    // Script to toggle active nav link based on scroll position
+    // Activar link de menú según scroll
     const sections = document.querySelectorAll("main section");
     const navLinks = document.querySelectorAll(".navbar a");
     function onScroll() {
@@ -418,4 +424,5 @@
   </script>
 </body>
 </html>
+
 
