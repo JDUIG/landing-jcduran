@@ -80,28 +80,23 @@
     }
 
     /* LOGO HERO (debajo del navbar, alineado a la izquierda y mas grande) */
-    .hero-logo{
+   .hero-logo{
   max-width:1180px;
-  margin:16px auto 8px;   /* arriba y abajo más ajustado */
+  margin:16px auto 8px;
   padding:0 24px;
-  text-align:left;        /* forzar alineación izquierda */
+  text-align:left;
 }
 
-/* Logo fluido, alineado a la izquierda */
+/* Logo fluido y sin “empujar” el layout */
 .hero-logo img{
-  display:block;          /* evita centrado por inline */
-  margin:0;               /* sin auto-centering */
-  width: clamp(320px, 40vw, 600px);  /* ancho fluido controlado */
+  display:block;
+  margin:0;
+  width: clamp(320px, 40vw, 600px); /* más contenido, sin pasarse */
   height:auto;
-  image-rendering:auto;
 }
-
 @media (max-width:768px){
-  .hero-logo img{
-    width: clamp(240px, 85vw, 520px);
-  }
+  .hero-logo img{ width: clamp(240px, 85vw, 520px); }
 }
-
 
     /* SECCIONES */
     section{
@@ -308,6 +303,7 @@
   </script>
 </body>
 </html>
+
 
 
 
