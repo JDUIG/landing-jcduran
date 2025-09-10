@@ -81,20 +81,24 @@
 
     /* LOGO HERO (debajo del navbar, alineado a la izquierda y mas grande) */
     .hero-logo{
-      max-width:1180px;margin:30px auto 0 auto;padding:0 24px;text-align:left;
-    }
-    .hero-logo img {
-  /* Tamaño fluido: mínimo 280px, ideal ~50% del ancho de pantalla, máximo 720px */
-  width: clamp(280px, 50vw, 720px);
-  height: auto;
-  display: block;        /* elimina huecos de línea */
-  image-rendering: auto; /* asegura buen escalado */
+  max-width:1180px;
+  margin:16px auto 8px;   /* arriba y abajo más ajustado */
+  padding:0 24px;
+  text-align:left;        /* forzar alineación izquierda */
 }
 
-@media (max-width: 768px) {
-  .hero-logo img {
-    /* En móvil: un poco más ancho, pero limitado para que no invada demasiado */
-    width: clamp(220px, 85vw, 560px);
+/* Logo fluido, alineado a la izquierda */
+.hero-logo img{
+  display:block;          /* evita centrado por inline */
+  margin:0;               /* sin auto-centering */
+  width: clamp(320px, 40vw, 600px);  /* ancho fluido controlado */
+  height:auto;
+  image-rendering:auto;
+}
+
+@media (max-width:768px){
+  .hero-logo img{
+    width: clamp(240px, 85vw, 520px);
   }
 }
 
@@ -304,6 +308,7 @@
   </script>
 </body>
 </html>
+
 
 
 
