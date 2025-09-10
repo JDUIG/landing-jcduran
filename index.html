@@ -2,398 +2,165 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Juan Carlos Durán - Blog Personal</title>
+  <title>Juan Carlos Durán - Web Personal</title>
   <style>
+    /* Reset */
+    body, h1, h2, p, ul, li, nav {
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      font-family: "Segoe UI", Arial, sans-serif;
-      margin: 0;
-      background: #fcfcfc;
-      color: #222;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #333;
+      padding: 40px;
     }
-    .navbar {
-      width: 100%;
-      position: sticky;
-      top: 0;
-      background: #111;
-      z-index: 100;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+
+    /* Navegación */
+    nav {
+      background: #161616;
+      padding: 0.5em 0;
+      margin-bottom: 40px;
     }
-    .navbar ul {
+    nav ul {
       display: flex;
-      justify-content: center;
-      align-items: center;
       list-style: none;
-      margin: 0;
-      padding: 0 24px;
-      height: 56px;
-      gap: 48px;
-      font-weight: 600;
-      font-size: 1.1rem;
+      justify-content: flex-start;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
-    .navbar li {
-      margin: 0;
+    nav li {
+      margin-right: 2em;
     }
-    .navbar a {
+    nav a {
+      font-family: 'Roboto', Arial, sans-serif;
+      font-weight: 400;
       color: #fff;
       text-decoration: none;
-      padding-bottom: 6px;
+      font-size: 1.1em;
       border-bottom: 2px solid transparent;
-      transition: border-color 0.25s, color 0.25s;
-      cursor: pointer;
+      padding-bottom: 5px;
+      transition: color 0.2s, border-bottom 0.2s;
     }
-    .navbar a:hover,
-    .navbar a.active {
-      color: #2a8aff;
-      border-color: #2a8aff;
+    nav a:hover {
+      color: #C7A398;
+      border-bottom: 2px solid #C7A398;
     }
+
+    /* Contenedor principal */
     .container {
-      max-width: 1180px;
-      margin: 48px auto 60px;
-      display: flex;
-      gap: 48px;
-      padding: 0 24px;
-      min-height: 80vh;
+      max-width: 960px;
+      margin: 0 auto;
+      text-align: center;
     }
-    .main-content {
-      flex: 2.5;
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 56px;
-      overflow-y: auto;
-      padding-right: 12px;
+
+    /* Logo personalizado */
+    .logo-container {
+      margin-bottom: 40px;
     }
-    section {
-      background: #fff;
-      border-radius: 12px;
-      padding: 28px 28px 36px;
-      box-shadow: 0 3px 18px rgba(0, 0, 0, 0.08);
-    }
-    section h2 {
-      font-size: 2.1rem;
-      color: #151570;
-      margin-bottom: 18px;
+    .logo-initials {
+      font-family: Georgia, serif;
+      font-size: 120px;
       font-weight: 700;
-      border-bottom: 3px solid #2a8aff;
-      padding-bottom: 6px;
+      color: #c7a398; /* Color piel/rosado */
+      letter-spacing: 0.2em;
+      user-select: none;
+      line-height: 1;
+      margin-bottom: -45px;
     }
-    .post {
-      margin-bottom: 42px;
-    }
-    .post-title {
-      font-size: 1.9rem;
+    .logo-name {
+      font-family: 'Pacifico', cursive, 'Brush Script MT', cursive;
+      font-size: 42px;
+      color: #000;
       font-weight: 700;
-      margin-bottom: 14px;
-      color: #222;
-    }
-    .post img {
-      width: 100%;
-      height: 340px;
-      object-fit: cover;
-      border-radius: 10px;
-      box-shadow: 0 1px 10px rgba(0, 0, 0, 0.12);
+      letter-spacing: 0.01em;
+      position: relative;
       margin-bottom: 12px;
-      transition: transform 0.3s ease;
-      cursor: pointer;
+      line-height: 1.2;
     }
-    .post img:hover {
-      transform: scale(1.03);
+    .logo-functions {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      color: #000;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      user-select: none;
+      margin-top: 24px;
     }
-    .post-excerpt {
-      font-size: 1.12rem;
-      color: #444;
-      margin-bottom: 8px;
-      line-height: 1.55;
+
+    /* Sección Acerca de mí */
+    .about-me {
+      font-size: 1.1em;
+      line-height: 1.6;
+      color: #333;
+      margin-top: 40px;
     }
-    .read-more {
-      color: #2a8aff;
-      font-size: 1.05rem;
-      text-decoration: underline;
-      cursor: pointer;
-      font-weight: 600;
-    }
-    .sabias-article {
-      margin-bottom: 30px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid #ddd;
-    }
-    .sabias-title {
-      font-weight: 700;
-      font-size: 1.3rem;
-      color: #17174c;
-      margin-bottom: 8px;
-    }
-    .sabias-date {
-      font-size: 0.9rem;
-      color: #666;
-      margin-bottom: 10px;
-    }
-    .sabias-text {
-      font-size: 1rem;
-      color: #444;
-      line-height: 1.5;
-    }
-    .sidebar {
-      flex: 1.2;
-      min-width: 280px;
-      background: #fafafa;
-      border-radius: 12px;
-      padding: 28px 26px;
-      box-shadow: 0 4px 28px rgba(0, 0, 0, 0.06);
-      height: fit-content;
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-      font-size: 0.95rem;
-      color: #444;
-    }
-    .widget h3 {
-      font-size: 1.25rem;
-      color: #0047aa;
-      margin-bottom: 18px;
-      border-bottom: 2px solid #2a8aff;
-      padding-bottom: 6px;
-      font-weight: 700;
-    }
-    .widget a.profile-link {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      font-weight: 600;
-      color: #2a8aff;
-      text-decoration: none;
-      margin-bottom: 10px;
-      transition: color 0.3s;
-    }
-    .widget a.profile-link:hover {
-      color: #0047aa;
-    }
-    .widget a.profile-link img {
-      border-radius: 50%;
-      width: 48px;
-      height: 48px;
-      object-fit: cover;
-      box-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
-    }
-    .widget p.widget-desc {
-      margin-bottom: 16px;
-      color: #555;
-      line-height: 1.4;
-    }
-    .widget a.widget-link {
-      color: #ff671f;
-      font-weight: 700;
-      text-decoration: none;
-      display: inline-block;
-      margin-bottom: 12px;
-      transition: color 0.3s;
-      font-size: 1rem;
-    }
-    .widget a.widget-link:hover {
-      color: #e05e00;
-      text-decoration: underline;
-    }
-    .widget ul.widget-list {
-      padding-left: 18px;
-      margin: 10px 0 0 0;
-      list-style: disc;
-    }
-    .widget ul.widget-list li {
-      margin-bottom: 9px;
-    }
-    .widget ul.widget-list li a {
-      color: #2a8aff;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .widget ul.widget-list li a:hover {
-      text-decoration: underline;
-      color: #0047aa;
-    }
-    /* Responsive design */
-    @media (max-width: 980px) {
-      .container {
+
+    /* Estilos responsivos para móvil */
+    @media (max-width: 600px) {
+      nav ul {
         flex-direction: column;
-        padding: 0 16px 50px;
-        margin: 20px auto 0 auto;
+        align-items: center;
       }
-      .main-content {
-        padding-right: 0;
-        margin-bottom: 40px;
-        overflow: visible;
+      nav li {
+        margin: 0.5em 0;
       }
-      .sidebar {
-        height: auto;
-        padding: 20px 20px;
-        margin-top: 0;
+      .logo-initials {
+        font-size: 70px;
+        letter-spacing: 0.1em;
+        margin-bottom: -25px;
       }
-      .navbar ul {
-        gap: 28px;
-        height: 48px;
-        font-size: 1rem;
+      .logo-name {
+        font-size: 28px;
       }
-      section h2 {
-        font-size: 1.7rem;
+      .logo-functions {
+        font-size: 12px;
+        margin-top: 16px;
       }
-      .post-title {
-        font-size: 1.6rem;
+      .about-me {
+        font-size: 1em;
+        padding: 0 15px;
       }
-      .sabias-title {
-        font-size: 1.2rem;
+      body {
+        padding: 20px;
       }
     }
   </style>
+
+  <!-- Fuente manuscrita Pacifico desde Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <nav class="navbar">
+
+  <nav>
     <ul>
-      <li><a href="#acerca" class="active">ACERCA DE</a></li>
-      <li><a href="#articulos">ARTÍCULOS DESTACADOS</a></li>
-      <li><a href="#observatorio">OBSERVATORIO</a></li>
-      <li><a href="#contacta">CONTACTA</a></li>
+      <li><a href="#" class="active">Acerca de</a></li>
+      <li><a href="#">Artículos Destacados</a></li>
+      <li><a href="#">Observatorio</a></li>
+      <li><a href="#">Contacta</a></li>
     </ul>
   </nav>
+
   <div class="container">
-    <main class="main-content">
-      <!-- Acerca de -->
-      <section id="acerca" tabindex="-1">
-        <h2>Acerca de mí</h2>
-        <p>
-          Soy Juan Carlos Durán, apasionado por la tecnología, la inteligencia artificial, los mercados financieros y la energía. En este espacio comparto análisis, ideas y recursos para potenciar el crecimiento profesional y personal.
-        </p>
-      </section>
 
-      <!-- Artículos Destacados -->
-      <section id="articulos" tabindex="-1">
-        <h2>Artículos Destacados</h2>
-        <article class="post">
-          <h3 class="post-title">El Futuro de la Energía Renovable</h3>
-          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Energía Renovable" />
-          <p class="post-excerpt">
-            Exploramos las tendencias recientes en energías limpias y su impacto en la sostenibilidad global.
-          </p>
-          <a href="#" class="read-more">Leer más...</a>
-        </article>
-        <article class="post">
-          <h3 class="post-title">Mercados Financieros en Transformación</h3>
-          <img src="https://images.unsplash.com/photo-1554224154-22dec7ec8818?auto=format&fit=crop&w=800&q=80" alt="Mercados Financieros" />
-          <p class="post-excerpt">
-            Análisis profundo sobre la evolución del mercado financiero mundial y nuevas oportunidades de inversión.
-          </p>
-          <a href="#" class="read-more">Leer más...</a>
-        </article>
-        <article class="post">
-          <h3 class="post-title">Inteligencia Artificial en la Industria</h3>
-          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Inteligencia Artificial" />
-          <p class="post-excerpt">
-            Descubre cómo la IA está revolucionando procesos industriales, desde la automatización hasta la toma de decisiones.
-          </p>
-          <a href="#" class="read-more">Leer más...</a>
-        </article>
-      </section>
+    <!-- Logo personalizado -->
+    <div class="logo-container">
+      <div class="logo-initials">J C D</div>
+      <div class="logo-name">Juan Carlos Durán</div>
+      <div class="logo-functions">Trader • MFIA • Analista Financiero</div>
+    </div>
 
-      <!-- Observatorio -->
-      <section id="observatorio" tabindex="-1">
-        <h2>Observatorio</h2>
-        <article class="sabias-article">
-          <h3 class="sabias-title">¿Sabías que blockchain revoluciona las finanzas?</h3>
-          <time class="sabias-date" datetime="2025-09-10">10 septiembre 2025</time>
-          <p class="sabias-text">
-            El concepto de <strong>blockchain</strong> permite registrar transacciones de forma segura, transparente y descentralizada, impactando en la digitalización financiera.
-          </p>
-        </article>
-        <article class="sabias-article">
-          <h3 class="sabias-title">Eficiencia energética para combatir el cambio climático</h3>
-          <time class="sabias-date" datetime="2025-09-10">10 septiembre 2025</time>
-          <p class="sabias-text">
-            Mejorar la eficiencia en el consumo energético es clave para reducir emisiones y ahorrar costos empresariales, siendo estratégica para un futuro sostenible.
-          </p>
-        </article>
-        <article class="sabias-article">
-          <h3 class="sabias-title">Machine learning y predicción de mercados</h3>
-          <time class="sabias-date" datetime="2025-09-10">10 septiembre 2025</time>
-          <p class="sabias-text">
-            Los modelos de <strong>machine learning</strong> analizan grandes datos para prever tendencias de mercado e influir en decisiones empresariales.
-          </p>
-        </article>
-      </section>
+    <!-- Sección Acerca de mí -->
+    <section class="about-me">
+      <h2>Acerca de mí</h2>
+      <p>Soy Juan Carlos Durán, trader, analista financiero y MFIA, con años de experiencia en mercados financieros y análisis técnico.</p>
+    </section>
 
-      <!-- Contacta -->
-      <section id="contacta" tabindex="-1">
-        <h2>Contacta conmigo</h2>
-        <p>
-          ¿Te gustaría colaborar, recibir asesoría o simplemente conversar sobre innovación y talento?
-          <br /><br />
-          <a href="mailto:juan@example.com" class="read-more">Envíame un correo</a>
-        </p>
-      </section>
-    </main>
-
-    <aside class="sidebar" aria-label="Barra lateral con perfil y publicaciones">
-      <div class="widget">
-        <h3>Perfil y redes</h3>
-        <a href="https://www.linkedin.com/in/tu-perfil" target="_blank" rel="noopener noreferrer" class="profile-link">
-          <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn logo" />
-          Juan Carlos Durán
-        </a>
-        <p class="widget-desc">
-          Sígueme en LinkedIn para conectar y compartir ideas profesionales.
-        </p>
-        <a href="https://tu-substack.substack.com" target="_blank" rel="noopener noreferrer" class="widget-link">
-          Newsletter en Substack
-        </a>
-        <p class="widget-desc">
-          Recibe análisis exclusivos y novedades directas en tu correo.
-        </p>
-      </div>
-
-      <div class="widget">
-        <h3>Artículos en LinkedIn</h3>
-        <ul class="widget-list">
-          <li><a href="https://www.linkedin.com/pulse/tu-post-1" target="_blank" rel="noopener noreferrer">Blockchain y su potencial en finanzas</a></li>
-          <li><a href="https://www.linkedin.com/pulse/tu-post-2" target="_blank" rel="noopener noreferrer">Claves de la energía renovable hoy</a></li>
-          <li><a href="https://www.linkedin.com/pulse/tu-post-3" target="_blank" rel="noopener noreferrer">Inteligencia artificial: mitos y realidades</a></li>
-        </ul>
-      </div>
-
-      <div class="widget">
-        <h3>Boletín en Substack</h3>
-        <ul class="widget-list">
-          <li><a href="https://tu-substack.substack.com/p/entrada-1" target="_blank" rel="noopener noreferrer">El futuro de los algoritmos financieros</a></li>
-          <li><a href="https://tu-substack.substack.com/p/entrada-2" target="_blank" rel="noopener noreferrer">Cómo apostar por la eficiencia energética</a></li>
-          <li><a href="https://tu-substack.substack.com/p/entrada-3" target="_blank" rel="noopener noreferrer">Tendencias en aprendizaje automático</a></li>
-        </ul>
-      </div>
-    </aside>
   </div>
 
-  <script>
-    // Script to toggle active nav link based on scroll position
-    const sections = document.querySelectorAll("main section");
-    const navLinks = document.querySelectorAll(".navbar a");
-
-    function onScroll() {
-      let scrollPos = window.scrollY || document.documentElement.scrollTop;
-      sections.forEach((section) => {
-        if (
-          scrollPos >= section.offsetTop - 60 &&
-          scrollPos < section.offsetTop + section.offsetHeight - 60
-        ) {
-          navLinks.forEach((link) => {
-            link.classList.remove("active");
-            if (link.getAttribute("href").substring(1) === section.id) {
-              link.classList.add("active");
-            }
-          });
-        }
-      });
-    }
-
-    window.addEventListener("scroll", onScroll);
-  </script>
 </body>
 </html>
+
