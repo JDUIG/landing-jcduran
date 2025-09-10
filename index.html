@@ -18,63 +18,77 @@
       width: 100%;
       position: sticky;
       top: 0;
-      background: #121212;
+      background: #111;
       z-index: 100;
-      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 32px;
-      height: 90px;
+      justify-content: center;
+      height: 56px;
       font-weight: 600;
-    }
-    .logo-container {
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      gap: 16px;
-    }
-    .logo-container img {
-      height: 80px;
-      width: auto;
-      display: block;
-      filter: drop-shadow(0 0 4px rgba(255,255,255,0.5));
+      font-size: 1.1rem;
     }
     .navbar ul {
       display: flex;
+      justify-content: center;
+      align-items: center;
       list-style: none;
       margin: 0;
       padding: 0;
       gap: 48px;
-      font-size: 1.15rem;
+      height: 56px;
     }
     .navbar li {
       margin: 0;
     }
     .navbar a {
-      color: #eee;
+      color: #fff;
       text-decoration: none;
       padding-bottom: 6px;
       border-bottom: 2px solid transparent;
       transition: border-color 0.25s, color 0.25s;
       cursor: pointer;
-      font-weight: 600;
     }
     .navbar a:hover,
     .navbar a.active {
-      color: #66aaff;
-      border-color: #66aaff;
+      color: #2a8aff;
+      border-color: #2a8aff;
+    }
+    .logo-center-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 36px auto 10px auto;
+      text-align: center;
+      max-width: 700px;
+    }
+    .logo-center-block img {
+      max-width: 340px;
+      width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 8px rgba(0,0,0,0.18));
+    }
+    .logo-name {
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: #222;
+      margin-bottom: 8px;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .logo-desc {
+      color: #333;
+      font-size: 1.14rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 34px;
+      text-transform: uppercase;
     }
     .container {
       max-width: 1180px;
-      margin: 60px auto 60px;
+      margin: 0 auto 60px;
       display: flex;
       gap: 48px;
       padding: 0 24px;
-      min-height: 80vh;
-      background: #fcfcfc;
-      border-radius: 12px;
-      box-shadow: 0 6px 25px rgba(0,0,0,0.08);
     }
     .main-content {
       flex: 2.5;
@@ -168,6 +182,8 @@
       gap: 32px;
       font-size: 0.95rem;
       color: #444;
+      max-width: 320px;
+      margin: 0 24px 60px 0;
     }
     .widget h3 {
       font-size: 1.25rem;
@@ -233,44 +249,25 @@
       color: #0047aa;
     }
     /* Responsive design */
-    @media (max-width: 980px) {
+    @media (max-width: 800px) {
+      .logo-center-block, .about-section { max-width: 98vw; }
+      .logo-center-block img { max-width: 92vw; }
       .container {
         flex-direction: column;
-        padding: 0 16px 50px;
-        margin: 20px auto 0 auto;
-      }
-      .main-content {
-        padding-right: 0;
-        margin-bottom: 40px;
-        overflow: visible;
+        padding: 0 16px 40px;
       }
       .sidebar {
-        height: auto;
-        padding: 20px 20px;
-        margin-top: 0;
+        max-width: 98vw;
+        margin: 0 0 40px 0;
       }
-      .navbar ul {
-        gap: 28px;
-        height: 48px;
-        font-size: 1rem;
-      }
-      section h2 {
-        font-size: 1.7rem;
-      }
-      .post-title {
-        font-size: 1.6rem;
-      }
-      .sabias-title {
-        font-size: 1.2rem;
+      .about-section {
+        margin-bottom: 40px;
       }
     }
   </style>
 </head>
 <body>
   <nav class="navbar" role="navigation" aria-label="Menú principal">
-    <div class="logo-container" tabindex="0">
-      <img src="https://cdn.discordapp.com/attachments/1140452143569974834/1144119957881323028/image.jpg" alt="Logo Juan Carlos Durán" />
-    </div>
     <ul>
       <li><a href="#acerca" class="active">ACERCA DE</a></li>
       <li><a href="#articulos">ARTÍCULOS DESTACADOS</a></li>
@@ -278,16 +275,22 @@
       <li><a href="#contacta">CONTACTA</a></li>
     </ul>
   </nav>
-  <div class="container">
+
+  <div class="logo-center-block" role="banner" aria-label="Logo y presentación">
+    <img src="https://cdn.discordapp.com/attachments/1140452143569974834/1144119957881323028/image.jpg" alt="Logo Juan Carlos Durán" />
+    <div class="logo-name" aria-label="Nombre Juan Carlos Durán">Juan Carlos Durán</div>
+    <div class="logo-desc" aria-label="Descripción profesional">TRADER • MFIA • ANALISTA FINANCIERO</div>
+  </div>
+
+  <section class="about-section" id="acerca" tabindex="-1">
+    <h2>Acerca de mí</h2>
+    <p>
+      Soy Juan Carlos Durán, apasionado por la tecnología, la inteligencia artificial, los mercados financieros y la energía. En este espacio comparto análisis, ideas y recursos para potenciar el crecimiento profesional y personal.
+    </p>
+  </section>
+
+  <div class="container" role="main">
     <main class="main-content">
-      <!-- Acerca de -->
-      <section id="acerca" tabindex="-1">
-        <h2>Acerca de mí</h2>
-        <p>
-          Soy Juan Carlos Durán, apasionado por la tecnología, la inteligencia artificial, los mercados financieros y la energía. En este espacio comparto análisis, ideas y recursos para potenciar el crecimiento profesional y personal.
-        </p>
-      </section>
-      <!-- Artículos Destacados -->
       <section id="articulos" tabindex="-1">
         <h2>Artículos Destacados</h2>
         <article class="post">
@@ -315,7 +318,6 @@
           <a href="#" class="read-more">Leer más...</a>
         </article>
       </section>
-      <!-- Observatorio -->
       <section id="observatorio" tabindex="-1">
         <h2>Observatorio</h2>
         <article class="sabias-article">
@@ -340,7 +342,6 @@
           </p>
         </article>
       </section>
-      <!-- Contacta -->
       <section id="contacta" tabindex="-1">
         <h2>Contacta conmigo</h2>
         <p>
@@ -385,6 +386,7 @@
       </div>
     </aside>
   </div>
+
   <script>
     // Script to toggle active nav link based on scroll position
     const sections = document.querySelectorAll("main section");
