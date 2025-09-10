@@ -44,8 +44,23 @@
     .menu-toggle{display:none;background:none;border:0;font-size:1.5rem;color:var(--texto-inv);cursor:pointer;}
     .nav-wrapper{flex:1;display:flex;justify-content:center;}
     .nav-links{display:flex;gap:28px;list-style:none;margin:0;padding:0;}
-    .nav-links a{color:var(--texto-inv);text-decoration:none;font-weight:600;font-size:1rem;
-      padding-bottom:4px;border-bottom:2px solid transparent;transition:.25s;}
+    .nav-links a{
+  font-family:"Poppins", sans-serif; /* 👈 Poppins */
+  font-weight:600;                   /* prueba con 600 */
+  font-size:1rem;
+  color:var(--texto-inv);
+  text-decoration:none;
+  padding-bottom:4px;
+  border-bottom:2px solid transparent;
+  transition:.25s;
+}
+.nav-links a:hover,
+.nav-links a.active{
+  font-weight:700;                   /* 👈 más fuerte al hover/activo */
+  color:var(--acento);
+  border-color:var(--acento);
+}
+
     .nav-links a:hover,.nav-links a.active{color:var(--acento);border-color:var(--acento);}
     .nav-links i{margin-right:6px;}
 
@@ -241,6 +256,7 @@
   </script>
 </body>
 </html>
+
 
 
 
