@@ -128,27 +128,6 @@
       .main-content{margin-bottom:40px;}
       .sidebar{position:static;}
     }
-
-    /* 📸 Imagen bio encapsulada y limitada */
-    section#acerca .bio-media {
-      max-width: 700px;
-      margin: 0 auto 28px;  /* centrada */
-      text-align: center;
-    }
-
-    section#acerca .bio-media img {
-      display: block;
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      box-shadow: 0 4px 14px rgba(0,0,0,.1);
-      transition: transform .4s ease, box-shadow .4s ease;
-    }
-
-    section#acerca .bio-media img:hover {
-      transform: scale(1.02);
-      box-shadow: 0 6px 18px rgba(0,0,0,.15);
-    }
   </style>
 </head>
 <body>
@@ -179,8 +158,14 @@
       <section id="acerca">
         <h2>Acerca de mí</h2>
 
-        <div class="bio-media">
-          <img src="img/logo-jcd.png" alt="Juan Carlos Durán" />
+        <!-- Contenedor limitador con estilos inline (máxima prioridad) -->
+        <div class="bio-media" style="max-width:700px; width:100%; margin:0 auto 28px; text-align:center;">
+          <img 
+            src="img/logo-jcd.png" 
+            alt="Juan Carlos Durán" 
+            class="bio-foto"
+            style="display:block; width:100% !important; height:auto !important; border-radius:8px; box-shadow:0 4px 14px rgba(0,0,0,.1);"
+          />
         </div>
 
         <p>
