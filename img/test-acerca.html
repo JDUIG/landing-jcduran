@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prueba - Acerca de mí</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 40px;
+      line-height: 1.6;
+    }
+    section#acerca {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 3px 18px rgba(0,0,0,.08);
+      padding: 32px;
+    }
+    section#acerca h2 {
+      text-align: center;
+      color: #111827;
+      font-size: 2rem;
+      margin-bottom: 24px;
+      border-bottom: 3px solid #06B6D4;
+      padding-bottom: 8px;
+    }
+
+    /* 🔒 Contenedor que limita el tamaño */
+    .bio-media {
+      max-width: 700px;           /* límite duro */
+      margin: 0 auto 28px;         /* centrado */
+      text-align: center;
+    }
+
+    .bio-media img {
+      display: block;
+      width: 100% !important;      /* ocupa todo el contenedor */
+      height: auto !important;     /* mantiene proporciones */
+      border-radius: 8px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.1);
+    }
+
+    .bio-media img:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 18px rgba(0,0,0,.15);
+    }
+
+    p { color:#333; margin-bottom: 18px; }
+  </style>
+</head>
+<body>
+
+  <section id="acerca">
+    <h2>Acerca de mí</h2>
+
+    <div class="bio-media">
+      <img src="img/logo-jcd.png" alt="Juan Carlos Durán">
+    </div>
+
+    <p>
+      Juan Carlos Durán es trader especializado en commodities y energía, con un enfoque particular en la aplicación de la inteligencia artificial al análisis financiero. A lo largo de su trayectoria ha combinado la experiencia en mercados internacionales con el uso de herramientas tecnológicas, compartiendo ideas y estrategias para anticipar tendencias y generar impacto en la toma de decisiones.
+    </p>
+    <p>
+      Es Ingeniero en Organización Industrial y cuenta con un MBA, además de un Máster en Mercados Financieros e Inversiones Alternativas (MFIA), lo que le aporta una sólida base formativa que complementa su experiencia en los mercados.
+    </p>
+    <p>
+      Su objetivo es seguir uniendo la experiencia en los mercados con la innovación tecnológica para impulsar mejores decisiones financieras y estratégicas.
+    </p>
+  </section>
+
+</body>
+</html>
