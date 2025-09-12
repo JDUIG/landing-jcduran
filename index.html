@@ -129,20 +129,20 @@
       .sidebar{position:static;}
     }
 
-    /* 📸 Imagen bio */
-    display: block;
-  max-width: 800px;      /* 📌 fija un tamaño máximo */
-  width: 75%;             /* ocupa el 75% hasta llegar a 800px */
-  height: auto;            /* mantiene proporciones originales */
-  margin: 0 auto 28px;     /* centra horizontalmente */
-  border-radius: 8px;
-  box-shadow: 0 4px 14px rgba(0,0,0,.1);
-  transition: transform .4s ease, box-shadow .4s ease;
-}
-
-.bio-foto:hover {
-  transform: scale(1.02);
-  box-shadow: 0 6px 18px rgba(0,0,0,.15);
+    /* 📸 Imagen bio centrada con ancho máximo */
+    section#acerca img.bio-foto {
+      display: block;
+      max-width: 700px;     /* ⚡ límite real de tamaño */
+      width: 100%;
+      height: auto;
+      margin: 0 auto 28px;  /* centrada horizontalmente */
+      border-radius: 8px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.1);
+      transition: transform .4s ease, box-shadow .4s ease;
+    }
+    section#acerca img.bio-foto:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 18px rgba(0,0,0,.15);
     }
   </style>
 </head>
@@ -293,12 +293,6 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
 
 
 
