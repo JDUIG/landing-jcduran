@@ -3,18 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Juan Carlos Durán | Artículos</title>
+  <title>Juan Carlos Durán — Artículos</title>
   <meta name="description" content="Análisis sobre IA, mercados y energía por Juan Carlos Durán. Lee los últimos artículos y suscríbete gratis a la newsletter Alpha & Grid." />
+  <link rel="icon" href="favicon.png" />
 
-  <!-- Estilos: visual limpio, coherente con tu landing, con modo oscuro automático -->
+  <!-- Estilos adaptados al tema visual actual: minimalista, limpio, con modo oscuro automático -->
   <style>
     :root{
-      --bg:#f7f7f8; --fg:#0f1115; --muted:#626675; --line:#e8e8ec; --card:#ffffff;
-      --brand:#111; --brand-contrast:#fff;
-      --radius:16px; --shadow:0 6px 20px rgba(0,0,0,.05);
+      --bg:#f7f7f8; --fg:#0f1115; --muted:#636774; --line:#e8e8ec; --card:#ffffff;
+      --brand:#111; --brand-contrast:#fff; --radius:16px; --shadow:0 6px 18px rgba(0,0,0,.06);
     }
     @media (prefers-color-scheme: dark){
-      :root{ --bg:#0b0d12; --fg:#e9e9ef; --muted:#a6abc2; --line:#21242c; --card:#10141b; --brand:#fff; --brand-contrast:#111; }
+      :root{
+        --bg:#0b0d12; --fg:#e9eaf0; --muted:#a6abc2; --line:#20232b; --card:#10141a;
+        --brand:#fff; --brand-contrast:#111; --shadow:none;
+      }
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -26,12 +29,10 @@
     }
     a{color:inherit}
     .container{max-width:1100px; margin:0 auto; padding:24px}
-
-    /* Header */
     header{
-      position:sticky; top:0; z-index:10;
+      position:sticky; top:0; z-index:20;
       backdrop-filter:saturate(140%) blur(6px);
-      background:color-mix(in oklab, var(--bg) 84%, transparent);
+      background:color-mix(in oklab, var(--bg) 86%, transparent);
       border-bottom:1px solid var(--line);
     }
     .topbar{display:flex; align-items:center; justify-content:space-between}
@@ -39,9 +40,8 @@
     .brand .logo{width:28px; height:28px; border-radius:8px; background:var(--brand)}
     .brand .title{font-weight:700; font-size:1.05rem}
     nav{display:flex; gap:18px; align-items:center}
-    nav a{opacity:.9; text-decoration:none}
+    nav a{opacity:.92; text-decoration:none}
     nav a:hover{opacity:1; text-decoration:underline}
-
     .btn{
       display:inline-block; background:var(--brand); color:var(--brand-contrast);
       text-decoration:none; padding:10px 14px; border-radius:10px; font-weight:600;
@@ -49,13 +49,11 @@
     }
     .btn:hover{opacity:.9; transform:translateY(-1px)}
     .btn.link{background:transparent; color:var(--fg); text-decoration:underline}
-
     main{padding:24px 0 64px}
-    h1{font-size:2.1rem; line-height:1.2; margin:0 0 8px}
+    h1{font-size:2rem; line-height:1.2; margin:0 0 8px}
     h2{font-size:1.6rem; margin:24px 0 8px}
-    h3{margin:16px 0 8px}
+    h3{margin:0 0 6px}
     .intro{color:var(--muted); margin:0 0 28px}
-
     .grid{
       display:grid; gap:24px;
       grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
@@ -66,22 +64,17 @@
       box-shadow:var(--shadow);
     }
     .hero{
-      display:flex; gap:20px; align-items:flex-start; margin:10px 0 28px;
-      flex-wrap:wrap;
+      display:flex; gap:20px; align-items:flex-start; margin:10px 0 28px; flex-wrap:wrap;
     }
     .hero img{width:84px; height:84px; border-radius:16px; object-fit:cover; border:1px solid var(--line)}
     .hero p{margin:0}
     .subtle{color:var(--muted)}
     .cta-row{display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:28px}
-
     footer{border-top:1px solid var(--line); padding:28px 0; color:var(--muted)}
-
-    /* Evita “saltos” mientras carga el embed de Substack */
+    /* Evita “saltos” mientras carga el embed */
     .substack-post-embed{min-height:180px}
-
-    /* Responsive */
     @media (max-width:560px){
-      h1{font-size:1.75rem}
+      h1{font-size:1.7rem}
       nav{display:none}
     }
   </style>
@@ -96,13 +89,12 @@
         <span class="title">Juan Carlos Durán</span>
       </a>
       <nav aria-label="Principal">
-        <a href="#acerca">Acerca de</a>
-        <a href="#articulos">Artículos</a>
-        <a href="#actualidad">Actualidad</a>
-        <a href="#conceptos">Conceptos</a>
-        <a href="#formacion">Formación</a>
-        <a href="#contacta">Contacta</a>
-        <!-- TODO: si tu substack es otro dominio, cámbialo aquí -->
+        <a href="#acerca">ACERCA DE</a>
+        <a href="#articulos">ARTÍCULOS</a>
+        <a href="#actualidad">ACTUALIDAD</a>
+        <a href="#conceptos">CONCEPTOS</a>
+        <a href="#formacion">FORMACIÓN</a>
+        <a href="#contacta">CONTACTA</a>
         <a class="btn" href="https://alphaandgrid.substack.com/subscribe" target="_blank" rel="noopener">Suscribirse gratis</a>
       </nav>
     </div>
@@ -113,7 +105,7 @@
     <!-- ACERCA DE -->
     <section id="acerca" class="card">
       <div class="hero">
-        <!-- TODO: cambia la imagen si quieres (o elimina el <img>) -->
+        <!-- Si no tienes imagen, se oculta al fallar -->
         <img src="img/jcd.jpg" alt="Foto de Juan Carlos Durán" onerror="this.style.display='none'"/>
         <div>
           <h1>Acerca de mí</h1>
@@ -123,7 +115,7 @@
       </div>
     </section>
 
-    <!-- ARTÍCULOS (EMBEDS SUBSTACK) -->
+    <!-- ARTÍCULOS (Substack embebido) -->
     <section id="articulos" class="articulos">
       <h2>Artículos</h2>
       <p class="intro">Últimas publicaciones de Alpha &amp; Grid</p>
@@ -132,10 +124,12 @@
         <!-- Artículo 1 -->
         <article class="card">
           <div class="substack-post-embed" data-theme="auto">
-            <!-- TODO: si cambia tu slug, actualiza la URL -->
             <a data-post-link href="https://alphaandgrid.substack.com/p/002-la-inteligencia-artificial-dispara">Leer en Substack</a>
           </div>
-          <noscript class="subtle">Activa JavaScript para ver el embed. Enlace directo: <a href="https://alphaandgrid.substack.com/p/002-la-inteligencia-artificial-dispara" target="_blank" rel="noopener">Abrir artículo #002</a>.</noscript>
+          <noscript class="subtle">
+            Activa JavaScript para ver el embed. Enlace directo:
+            <a href="https://alphaandgrid.substack.com/p/002-la-inteligencia-artificial-dispara" target="_blank" rel="noopener">Abrir artículo #002</a>.
+          </noscript>
         </article>
 
         <!-- Artículo 2 -->
@@ -143,7 +137,10 @@
           <div class="substack-post-embed" data-theme="auto">
             <a data-post-link href="https://alphaandgrid.substack.com/p/001-mercados-en-transicion-energia">Leer en Substack</a>
           </div>
-          <noscript class="subtle">Activa JavaScript para ver el embed. Enlace directo: <a href="https://alphaandgrid.substack.com/p/001-mercados-en-transicion-energia" target="_blank" rel="noopener">Abrir artículo #001</a>.</noscript>
+          <noscript class="subtle">
+            Activa JavaScript para ver el embed. Enlace directo:
+            <a href="https://alphaandgrid.substack.com/p/001-mercados-en-transicion-energia" target="_blank" rel="noopener">Abrir artículo #001</a>.
+          </noscript>
         </article>
 
         <!-- Artículo 3 (bienvenida) -->
@@ -151,7 +148,10 @@
           <div class="substack-post-embed" data-theme="auto">
             <a data-post-link href="https://alphaandgrid.substack.com/p/bienvenidos-a-alpha-and-grid">Leer en Substack</a>
           </div>
-          <noscript class="subtle">Activa JavaScript para ver el embed. Enlace directo: <a href="https://alphaandgrid.substack.com/p/bienvenidos-a-alpha-and-grid" target="_blank" rel="noopener">Abrir bienvenida</a>.</noscript>
+          <noscript class="subtle">
+            Activa JavaScript para ver el embed. Enlace directo:
+            <a href="https://alphaandgrid.substack.com/p/bienvenidos-a-alpha-and-grid" target="_blank" rel="noopener">Abrir bienvenida</a>.
+          </noscript>
         </article>
       </div>
 
@@ -161,7 +161,7 @@
         <span class="subtle">Nuevos artículos cada semana.</span>
       </div>
 
-      <!-- (Opcional) Formulario de suscripción embebido -->
+      <!-- Formulario de suscripción (opcional) -->
       <div style="margin-top:24px">
         <iframe
           src="https://alphaandgrid.substack.com/embed"
@@ -173,7 +173,7 @@
       </div>
     </section>
 
-    <!-- ACTUALIDAD (placeholder editable) -->
+    <!-- ACTUALIDAD -->
     <section id="actualidad">
       <h2>Actualidad</h2>
       <article class="card">
@@ -183,7 +183,7 @@
       </article>
     </section>
 
-    <!-- CONCEPTOS (placeholder editable) -->
+    <!-- CONCEPTOS -->
     <section id="conceptos">
       <h2>Conceptos</h2>
       <article class="card">
@@ -192,7 +192,7 @@
       </article>
     </section>
 
-    <!-- FORMACIÓN (placeholder editable) -->
+    <!-- FORMACIÓN -->
     <section id="formacion">
       <h2>Formación</h2>
       <article class="card">
@@ -209,7 +209,6 @@
         <p><a class="btn" href="mailto:tuemail@dominio.com">Envíame un correo</a></p>
         <h3 style="margin-top:20px">Perfil y redes</h3>
         <p class="subtle">
-          <!-- TODO: pon tu enlace real de LinkedIn -->
           <a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a> ·
           <a href="https://alphaandgrid.substack.com" target="_blank" rel="noopener">Alpha &amp; Grid en Substack</a>
         </p>
@@ -226,11 +225,12 @@
 
   <!-- Script oficial de Substack: necesario UNA sola vez por página -->
   <script async src="https://substack.com/embedjs/embed.js"></script>
-
-  <!-- Año dinámico en el pie -->
   <script>
+    // Año dinámico en el footer
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
+
+
 
