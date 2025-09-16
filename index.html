@@ -105,7 +105,6 @@
     <!-- ACERCA DE -->
     <section id="acerca" class="card">
       <div class="hero">
-        <!-- Si no tienes imagen, se oculta al fallar -->
         <img src="img/jcd.jpg" alt="Foto de Juan Carlos Durán" onerror="this.style.display='none'"/>
         <div>
           <h1>Acerca de mí</h1>
@@ -126,32 +125,20 @@
           <div class="substack-post-embed" data-theme="auto">
             <a data-post-link href="https://alphaandgrid.substack.com/p/002-la-inteligencia-artificial-dispara">Leer en Substack</a>
           </div>
-          <noscript class="subtle">
-            Activa JavaScript para ver el embed. Enlace directo:
-            <a href="https://alphaandgrid.substack.com/p/002-la-inteligencia-artificial-dispara" target="_blank" rel="noopener">Abrir artículo #002</a>.
-          </noscript>
         </article>
 
-        <!-- Artículo 2 -->
+        <!-- Artículo 2 (corregido) -->
         <article class="card">
           <div class="substack-post-embed" data-theme="auto">
             <a data-post-link href="https://alphaandgrid.substack.com/p/001-mercados-en-transicion-energia">Leer en Substack</a>
           </div>
-          <noscript class="subtle">
-            Activa JavaScript para ver el embed. Enlace directo:
-            <a href="https://alphaandgrid.substack.com/p/001-mercados-en-transicion-energia" target="_blank" rel="noopener">Abrir artículo #001</a>.
-          </noscript>
         </article>
 
-        <!-- Artículo 3 (bienvenida) -->
+        <!-- Artículo 3 -->
         <article class="card">
           <div class="substack-post-embed" data-theme="auto">
             <a data-post-link href="https://alphaandgrid.substack.com/p/bienvenidos-a-alpha-and-grid">Leer en Substack</a>
           </div>
-          <noscript class="subtle">
-            Activa JavaScript para ver el embed. Enlace directo:
-            <a href="https://alphaandgrid.substack.com/p/bienvenidos-a-alpha-and-grid" target="_blank" rel="noopener">Abrir bienvenida</a>.
-          </noscript>
         </article>
       </div>
 
@@ -226,7 +213,6 @@
   <!-- Script oficial de Substack: necesario UNA sola vez por página -->
   <script async src="https://substack.com/embedjs/embed.js"></script>
   <script>
-    // Año dinámico en el footer
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
