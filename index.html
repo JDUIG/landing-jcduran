@@ -140,27 +140,29 @@
 
     <!-- ARTÍCULOS -->
     <section id="articulos" class="articulos">
-      <h2>Artículos</h2>
-      <p class="intro">Últimas publicaciones de Alpha &amp; Grid</p>
+  <h2>Artículos</h2>
+  <p class="intro">Últimas publicaciones de Alpha &amp; Grid</p>
 
-      <div class="grid">
-        <article class="card">
-          <div class="substack-post-embed" data-theme="auto">
-            <a data-post-link href="https://alphaandgrid.substack.com/p/002-la-inteligencia-artificial-dispara">Leer en Substack</a>
-          </div>
-        </article>
-        <article class="card">
-          <div class="substack-post-embed" data-theme="auto">
-            <a data-post-link href="https://alphaandgrid.substack.com/p/001-mercados-en-transicion-energia">Leer en Substack</a>
-          </div>
-        </article>
-        <article class="card">
-          <div class="substack-post-embed" data-theme="auto">
-            <a data-post-link href="https://alphaandgrid.substack.com/p/bienvenidos-a-alpha-and-grid">Leer en Substack</a>
-          </div>
-        </article>
+  <div id="articulos-grid" class="grid">
+    <!-- Fallback opcional: deja tus 3 posts manuales dentro de este comentario.
+    <article class="card">
+      <div class="substack-post-embed" data-theme="auto">
+        <a data-post-link href="https://alphaandgrid.substack.com/p/002-la-inteligencia-artificial-dispara">Leer en Substack</a>
       </div>
-    </section>
+    </article>
+    <article class="card">
+      <div class="substack-post-embed" data-theme="auto">
+        <a data-post-link href="https://alphaandgrid.substack.com/p/001-mercados-en-transicion-energia">Leer en Substack</a>
+      </div>
+    </article>
+    <article class="card">
+      <div class="substack-post-embed" data-theme="auto">
+        <a data-post-link href="https://alphaandgrid.substack.com/p/bienvenidos-a-alpha-and-grid">Leer en Substack</a>
+      </div>
+    </article>
+    -->
+  </div>
+</section>
 
        <!-- ACTUALIDAD -->
     <section id="actualidad">
@@ -243,8 +245,53 @@
     const nav = document.querySelector('nav');
     toggle.addEventListener('click', () => nav.classList.toggle('open'));
   </script>
+  // === Artículos auto-actualizables desde Substack ===
+  (function loadSubstackFeed(){
+    const FEED_URL = 'https://alphaandgrid.substack.com/feed'; // RSS oficial
+    const PROXY = 'https://api.allorigins.win/raw?url=';        // Proxy CORS
+    const grid = document.getElementById('articulos-grid');
+    if(!grid) return;
+
+    fetch(PROXY + encodeURIComponent(FEED_URL))
+      .then(r => {
+        if(!r.ok) throw new Error('HTTP ' + r.status);
+        return r.text();
+      })
+      .then(xml => new DOMParser().parseFromString(xml, 'text/xml'))
+      .then(doc => {
+        const items = Array.from(doc.querySelectorAll('item')).slice(0, 6);
+        if (!items.length) throw new Error('No items in feed');
+
+        grid.innerHTML = items.map(item => {
+          const link  = item.querySelector('link')?.textContent || '#';
+          const title = item.querySelector('title')?.textContent || 'Sin título';
+          const pub   = new Date(item.querySelector('pubDate')?.textContent || Date.now());
+          const fecha = pub.toLocaleDateString('es-ES', { day:'2-digit', month:'long', year:'numeric' });
+
+          // Descripción en texto plano (limpia HTML y CDATA)
+          const raw   = item.querySelector('description')?.textContent || '';
+          const text  = raw.replace(/<!\[CDATA\[|\]\]>/g,'').replace(/<[^>]*>/g,'').trim();
+          const snippet = text.length > 160 ? (text.slice(0,157) + '…') : text;
+
+          return `
+            <article class="card">
+              <h3 style="margin-top:0">${title}</h3>
+              <p class="subtle">${fecha}</p>
+              <p>${snippet}</p>
+              <p><a class="btn" href="${link}" target="_blank" rel="noopener">Leer en Substack</a></p>
+            </article>
+          `;
+        }).join('');
+      })
+      .catch(err => {
+        console.warn('No se pudo cargar el feed de Substack:', err);
+        // Fallback: si dejaste tarjetas manuales comentadas arriba, no hacemos nada y seguirá vacío o con tu contenido estático
+      });
+  })();
+</script>
 </body>
 </html>
+
 
 
 
