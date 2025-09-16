@@ -1,276 +1,50 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Juan Carlos Durán — Artículos</title>
-  <meta name="description" content="Análisis sobre IA, mercados y energía por Juan Carlos Durán. Lee los últimos artículos y suscríbete gratis a la newsletter Alpha & Grid." />
-  <link rel="icon" href="favicon.png" />
+<script>
+(function loadSubstackFeed(){
+  const FEED = 'https://alphaandgrid.substack.com/feed';
+  const PROXY = 'https://api.allorigins.win/raw?url=';
+  const grid = document.getElementById('articulos-grid');
+  if(!grid) return;
 
-  <!-- Estilos -->
-  <style>
-    :root{
-      --bg:#F7F7F8; --fg:#0F1115; --muted:#636774; --line:#E8E8EC; --card:#FFFFFF;
-      --brand:#06B6D4; --brand-contrast:#fff; --radius:16px; --shadow:0 6px 18px rgba(0,0,0,.06);
-    }
+  // Mensaje en consola para ver si funciona
+  console.log('Cargando artículos desde Substack...');
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0; background:var(--bg); color:var(--fg);
-      font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Inter,Ubuntu,Arial,sans-serif;
-      -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-    }
+  fetch(PROXY + encodeURIComponent(FEED))
+    .then(r => {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.text();
+    })
+    .then(xml => {
+      const doc = new DOMParser().parseFromString(xml, 'text/xml');
+      const items = Array.from(doc.querySelectorAll('item')).slice(0, 6);
+      console.log('Artículos encontrados:', items.length);
 
-    a{color:inherit}
-    .container{max-width:1100px; margin:0 auto; padding:24px}
+      if (!items.length) throw new Error('No se encontraron artículos');
 
-    header{
-      position:sticky; top:0; z-index:20;
-      backdrop-filter:saturate(140%) blur(6px);
-      background:rgba(255,255,255,0.85);
-      border-bottom:1px solid var(--line);
-    }
-    .topbar{display:flex; align-items:center; justify-content:space-between; position:relative}
-    .brand{display:flex; align-items:center; gap:10px; text-decoration:none}
-    .brand .logo{width:28px; height:28px; border-radius:8px; background:var(--brand)}
-    .brand .title{font-weight:700; font-size:1.05rem; color:var(--fg)}
+      grid.innerHTML = items.map(item => {
+        const title = item.querySelector('title')?.textContent || 'Sin título';
+        const link = item.querySelector('link')?.textContent || '#';
+        const date = new Date(item.querySelector('pubDate')?.textContent || Date.now());
+        const fecha = date.toLocaleDateString('es-ES',{day:'2-digit',month:'long',year:'numeric'});
+        const descRaw = item.querySelector('description')?.textContent || '';
+        const texto = descRaw.replace(/<!\[CDATA\[|\]\]>/g,'').replace(/<[^>]*>/g,'').trim();
+        const snippet = texto.length > 160 ? texto.slice(0,157)+'…' : texto;
 
-    nav{display:flex; gap:18px; align-items:center}
-    nav a{opacity:.92; text-decoration:none; color:var(--fg); font-weight:400;}
-    nav a:hover{opacity:1; text-decoration:underline; color:var(--brand)}
-
-    .btn{
-      display:inline-block; background:var(--brand); color:var(--brand-contrast);
-      text-decoration:none; padding:10px 14px; border-radius:10px; font-weight:600;
-      transition:transform .06s ease, opacity .2s ease;
-    }
-    .btn:hover{opacity:.9; transform:translateY(-1px)}
-
-    .menu-toggle {
-      display:none; background:none; border:0; color:var(--fg);
-      font-size:1.8rem; cursor:pointer;
-    }
-
-    main{padding:24px 0 64px}
-    h1{font-size:2.4rem; line-height:1.2; margin:0 0 8px}
-    h2{font-size:1.8rem; margin:24px 0 8px}
-    h3{margin:0 0 6px}
-    .intro{color:var(--muted); margin:0 0 28px}
-
-    .grid{
-      display:grid; gap:24px;
-      grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
-      align-items:start;
-    }
-    .card{
-      background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:24px;
-      box-shadow:var(--shadow);
-    }
-    .subtle{color:var(--muted)}
-    footer{border-top:1px solid var(--line); padding:28px 0; color:var(--muted)}
-
-    .logo-acerca {
-      display:block; width:240px; max-width:100%; margin:16px 0 32px 0;
-    }
-
-    /* Barra lateral fija de redes */
-    .social-fixed {
-      position: fixed; top: 40%; right: 24px;
-      display: flex; flex-direction: column; gap: 14px; z-index: 9999;
-    }
-    .social-btn img {
-      width: 38px; height: 38px; border-radius: 50%;
-      background: #fff; border: 1px solid #ddd;
-      box-shadow: 0 2px 6px rgba(0,0,0,.15);
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .social-btn img:hover {
-      transform: scale(1.1);
-      box-shadow: 0 4px 10px rgba(0,0,0,.25);
-    }
-
-    /* Responsive */
-    @media (max-width: 720px){
-      .social-fixed { right:12px; top:auto; bottom:20px; flex-direction:row; }
-      nav {
-        display:none; flex-direction:column; gap:16px; background:var(--card);
-        padding:20px; border-radius:12px; position:absolute; top:56px; right:24px;
-        width: 240px; box-shadow:var(--shadow);
-        opacity:0; pointer-events:none; transform:translateY(-10px);
-        transition:all .3s ease;
-      }
-      nav.open{display:flex; opacity:1; pointer-events:auto; transform:translateY(0);}
-      .menu-toggle{display:block;}
-    }
-  </style>
-</head>
-
-<body>
-  <!-- CABECERA -->
-  <header>
-    <div class="container topbar">
-      <a class="brand" href="#acerca">
-        <span class="logo" aria-hidden="true"></span>
-        <span class="title">Juan Carlos Durán</span>
-      </a>
-      <button class="menu-toggle" aria-label="Abrir menú">☰</button>
-      <nav aria-label="Principal">
-        <a href="#acerca">ACERCA DE</a>
-        <a href="#articulos">ARTÍCULOS</a>
-        <a href="#actualidad">ACTUALIDAD</a>
-        <a href="#conceptos">CONCEPTOS</a>
-        <a href="#formacion">FORMACIÓN</a>
-        <a href="#contacta">CONTACTA</a>
-        <a class="btn" href="https://alphaandgrid.substack.com/subscribe" target="_blank" rel="noopener">Suscribirse gratis</a>
-      </nav>
-    </div>
-  </header>
-
-  <!-- CONTENIDO -->
-  <main class="container">
-    <!-- ACERCA DE -->
-    <section id="acerca" class="card">
-      <h1>Acerca de</h1>
-      <img src="img/logo-jcd-tight.png" alt="Logo de Juan Carlos Durán" class="logo-acerca">
-      <p>Juan Carlos Durán es trader especializado en <strong>commodities</strong> y <strong>energía</strong>, con un enfoque particular en la aplicación de la <strong>inteligencia artificial</strong> al análisis financiero. A lo largo de su trayectoria ha combinado la experiencia en mercados internacionales con el uso de herramientas tecnológicas, compartiendo ideas y estrategias para anticipar tendencias y generar impacto en la toma de decisiones.</p>
-      <p>Es <strong>Ingeniero en Organización Industrial</strong> y cuenta con un <strong>MBA</strong>, además de un <strong>Máster en Mercados Financieros e Inversiones Alternativas (MFIA)</strong>, lo que le aporta una sólida base formativa que complementa su experiencia en los mercados.</p>
-    </section>
-
-    <!-- ARTÍCULOS -->
-    <section id="articulos" class="articulos">
-      <h2>Artículos</h2>
-      <p class="intro">Últimas publicaciones de Alpha &amp; Grid</p>
-      <div id="articulos-grid" class="grid"></div>
-    </section>
-
-    <!-- ACTUALIDAD -->
-    <section id="actualidad">
-      <h2>Actualidad</h2>
-      <div class="grid">
-        <article class="card">
-          <h3 style="margin-top:0">Blockchain acelera la tokenización de activos</h3>
-          <p class="subtle">10 septiembre 2025</p>
-          <p>Selección de prensa sobre el impacto de la tokenización en los mercados financieros. <em>Fuente: Financial Times</em>.</p>
-        </article>
-        <article class="card">
-          <h3 style="margin-top:0">La inversión en IA impulsa redes eléctricas</h3>
-          <p class="subtle">12 septiembre 2025</p>
-          <p>Los grandes fondos apuestan por redes inteligentes para absorber la demanda de vehículos eléctricos y renovables. <em>Fuente: Bloomberg</em>.</p>
-        </article>
-      </div>
-    </section>
-
-    <!-- CONCEPTOS -->
-    <section id="conceptos">
-      <h2>Conceptos</h2>
-      <div class="grid">
-        <article class="card">
-          <h3 style="margin-top:0">Qué es el <em>basis</em> en commodities</h3>
-          <p>Relación entre el precio <em>spot</em> y el precio de futuros, clave para estrategias de cobertura. <a href="#">Leer explicación</a></p>
-        </article>
-        <article class="card">
-          <h3 style="margin-top:0">Backwardation y Contango</h3>
-          <p>Dos estructuras típicas de los mercados de futuros que afectan los precios y el coste de almacenamiento. <a href="#">Ver más</a></p>
-        </article>
-      </div>
-    </section>
-
-    <!-- FORMACIÓN -->
-    <section id="formacion">
-      <h2>Formación</h2>
-      <div class="grid">
-        <article class="card">
-          <h3 style="margin-top:0">Guía: Coberturas básicas con futuros</h3>
-          <p>Explicación paso a paso con ejemplos y hoja de cálculo descargable. <a href="#">Abrir guía</a></p>
-        </article>
-        <article class="card">
-          <h3 style="margin-top:0">Curso: Fundamentos de mercados de energía</h3>
-          <p>Curso introductorio sobre mercados eléctricos y de gas para perfiles financieros. <a href="#">Acceder al curso</a></p>
-        </article>
-      </div>
-    </section>
-
-    <!-- CONTACTA -->
-    <section id="contacta">
-      <h2>Contacta conmigo</h2>
-      <article class="card">
-        <p>¿Te gustaría colaborar?</p>
-        <p><a class="btn" href="mailto:tuemail@dominio.com">Envíame un correo</a></p>
-      </article>
-    </section>
-  </main>
-
-  <!-- PIE -->
-  <footer>
-    <div class="container">
-      © <span id="y"></span> Juan Carlos Durán — Todos los derechos reservados.
-    </div>
-  </footer>
-
-  <!-- Redes -->
-  <div class="social-fixed">
-    <a href="https://www.linkedin.com/in/juan-carlos-dur%C3%A1n-mfia-69791516/" target="_blank" rel="noopener" class="social-btn linkedin">
-      <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
-    </a>
-    <a href="https://alphaandgrid.substack.com" target="_blank" rel="noopener" class="social-btn substack">
-      <img src="https://cdn.worldvectorlogo.com/logos/substack-1.svg" alt="Substack">
-    </a>
-  </div>
-
-  <!-- Scripts -->
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-    const toggle = document.querySelector('.menu-toggle');
-    const nav = document.querySelector('nav');
-    toggle.addEventListener('click', () => nav.classList.toggle('open'));
-
-    // === Feed automático desde Substack ===
-    (function loadSubstackFeed(){
-      const FEED = 'https://alphaandgrid.substack.com/feed';
-      const PROXY = 'https://api.allorigins.win/raw?url=';
-      const grid = document.getElementById('articulos-grid');
-      if(!grid) return;
-
-      fetch(PROXY + encodeURIComponent(FEED))
-        .then(r => {
-          if (!r.ok) throw new Error('HTTP ' + r.status);
-          return r.text();
-        })
-        .then(xml => {
-          const doc = new DOMParser().parseFromString(xml, 'text/xml');
-          const items = Array.from(doc.querySelectorAll('item')).slice(0, 6);
-
-          if (!items.length) throw new Error('No se encontraron artículos');
-
-          grid.innerHTML = items.map(item => {
-            const title = item.querySelector('title')?.textContent || 'Sin título';
-            const link = item.querySelector('link')?.textContent || '#';
-            const date = new Date(item.querySelector('pubDate')?.textContent || Date.now());
-            const fecha = date.toLocaleDateString('es-ES',{day:'2-digit',month:'long',year:'numeric'});
-            const descRaw = item.querySelector('description')?.textContent || '';
-            const texto = descRaw.replace(/<!\[CDATA\[|\]\]>/g,'').replace(/<[^>]*>/g,'').trim();
-            const snippet = texto.length > 160 ? texto.slice(0,157)+'…' : texto;
-
-            return `
-              <article class="card">
-                <h3 style="margin-top:0">${title}</h3>
-                <p class="subtle">${fecha}</p>
-                <p>${snippet}</p>
-                <p><a class="btn" href="${link}" target="_blank" rel="noopener">Leer en Substack</a></p>
-              </article>
-            `;
-          }).join('');
-        })
-        .catch(err => {
-          console.error('Error cargando feed:', err);
-          grid.innerHTML = `<p>No se pudieron cargar los artículos ahora mismo.</p>`;
-        });
-    })();
-  </script>
-</body>
-</html>
+        return `
+          <article class="card">
+            <h3 style="margin-top:0">${title}</h3>
+            <p class="subtle">${fecha}</p>
+            <p>${snippet}</p>
+            <p><a class="btn" href="${link}" target="_blank" rel="noopener">Leer en Substack</a></p>
+          </article>
+        `;
+      }).join('');
+    })
+    .catch(err => {
+      console.error('Error cargando feed:', err);
+      grid.innerHTML = `<p>No se pudieron cargar los artículos ahora mismo.</p>`;
+    });
+})();
+</script>
 
 
 
