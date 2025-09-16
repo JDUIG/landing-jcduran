@@ -68,12 +68,18 @@
       background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:24px;
       box-shadow:var(--shadow);
     }
+    .card img{
+      width:100%; border-radius:12px; margin-bottom:12px;
+    }
+
     .subtle{color:var(--muted)}
     footer{border-top:1px solid var(--line); padding:28px 0; color:var(--muted)}
 
     .logo-acerca {
       display:block; width:240px; max-width:100%; margin:16px 0 32px 0;
     }
+
+    .cta-row{display:flex; justify-content:center; margin-top:32px}
 
     /* Barra lateral fija de redes */
     .social-fixed {
@@ -89,6 +95,21 @@
     .social-btn img:hover {
       transform: scale(1.1);
       box-shadow: 0 4px 10px rgba(0,0,0,.25);
+    }
+
+    /* Loader animado */
+    .loader {
+      border: 4px solid #e5e7eb;
+      border-top: 4px solid var(--brand);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      margin: 32px auto;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     /* Responsive */
@@ -142,7 +163,14 @@
     <section id="articulos" class="articulos">
       <h2>Artículos</h2>
       <p class="intro">Últimas publicaciones de Alpha &amp; Grid</p>
-      <div id="articulos-grid" class="grid"></div>
+
+      <div id="articulos-grid" class="grid">
+        <div class="loader"></div>
+      </div>
+
+      <div class="cta-row">
+        <a class="btn" href="https://alphaandgrid.substack.com" target="_blank" rel="noopener">Ver todos los artículos</a>
+      </div>
     </section>
 
     <!-- ACTUALIDAD -->
@@ -227,56 +255,66 @@
     toggle.addEventListener('click', () => nav.classList.toggle('open'));
 
     // === Feed automático desde Substack ===
-   (function loadSubstackFeed(){
-  const FEED = 'https://alphaandgrid.substack.com/feed';
-  const PROXY = 'https://api.allorigins.win/raw?url=';
-  const grid = document.getElementById('articulos-grid');
-  if(!grid) return;
+    (function loadSubstackFeed(){
+      const FEED = 'https://alphaandgrid.substack.com/feed';
+      const PROXY = 'https://api.allorigins.win/raw?url=';
+      const grid = document.getElementById('articulos-grid');
+      if(!grid) return;
 
-  console.log('Cargando artículos desde Substack...');
+      grid.innerHTML = '<div class="loader"></div>';
 
-  fetch(PROXY + encodeURIComponent(FEED))
-    .then(r => {
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.text();
-    })
-    .then(xml => {
-      const doc = new DOMParser().parseFromString(xml, 'text/xml');
-      const items = Array.from(doc.querySelectorAll('item')).slice(0, 6);
+      fetch(PROXY + encodeURIComponent(FEED))
+        .then(r => {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.text();
+        })
+        .then(xml => {
+          const doc = new DOMParser().parseFromString(xml, 'text/xml');
+          const items = Array.from(doc.querySelectorAll('item')).slice(0, 6);
 
-      console.log('Artículos encontrados:', items.length);
+          if (!items.length) throw new Error('No se encontraron artículos');
 
-      if (!items.length) throw new Error('No se encontraron artículos');
+          grid.innerHTML = items.map(item => {
+            const title = item.querySelector('title')?.textContent || 'Sin título';
+            const link = item.querySelector('link')?.textContent || '#';
+            const date = new Date(item.querySelector('pubDate')?.textContent || Date.now());
+            const fecha = date.toLocaleDateString('es-ES',{day:'2-digit',month:'long',year:'numeric'});
 
-      grid.innerHTML = items.map(item => {
-        const title = item.querySelector('title')?.textContent || 'Sin título';
-        const link = item.querySelector('link')?.textContent || '#';
-        const date = new Date(item.querySelector('pubDate')?.textContent || Date.now());
-        const fecha = date.toLocaleDateString('es-ES',{day:'2-digit',month:'long',year:'numeric'});
+            const raw = item.querySelector('description')?.textContent 
+                     || item.querySelector('content\\:encoded')?.textContent 
+                     || item.querySelector('itunes\\:summary')?.textContent 
+                     || '';
+            const texto = raw.replace(/<!\[CDATA\[|\]\]>/g,'').replace(/<[^>]*>/g,'').trim();
+            const snippet = texto.length > 160 ? texto.slice(0,157)+'…' : texto;
 
-        // Buscar contenido en varias etiquetas posibles
-        const raw = item.querySelector('description')?.textContent 
-                 || item.querySelector('content\\:encoded')?.textContent 
-                 || item.querySelector('itunes\\:summary')?.textContent 
-                 || '';
-        const texto = raw.replace(/<!\[CDATA\[|\]\]>/g,'').replace(/<[^>]*>/g,'').trim();
-        const snippet = texto.length > 160 ? texto.slice(0,157)+'…' : texto;
+            let img = item.querySelector('media\\:thumbnail')?.getAttribute('url') || '';
+            if (!img) {
+              const m = raw.match(/<img.*?src="(.*?)"/i);
+              if (m) img = m[1];
+            }
 
-        return `
-          <article class="card">
-            <h3 style="margin-top:0">${title}</h3>
-            <p class="subtle">${fecha}</p>
-            <p>${snippet || 'Sin descripción disponible.'}</p>
-            <p><a class="btn" href="${link}" target="_blank" rel="noopener">Leer en Substack</a></p>
-          </article>
-        `;
-      }).join('');
-    })
-    .catch(err => {
-      console.error('Error cargando feed:', err);
-      grid.innerHTML = `<p>No se pudieron cargar los artículos ahora mismo.</p>`;
-    });
-})();
-</script>
+            return `
+              <article class="card">
+                ${img ? `<img src="${img}" alt="">` : ''}
+                <h3 style="margin-top:0">${title}</h3>
+                <p class="subtle">${fecha}</p>
+                <p>${snippet || 'Sin descripción disponible.'}</p>
+                <p><a class="btn" href="${link}" target="_blank" rel="noopener">Leer en Substack</a></p>
+              </article>
+            `;
+          }).join('');
+        })
+        .catch(err => {
+          console.error('Error cargando feed:', err);
+          grid.innerHTML = `
+            <article class="card">
+              <h3>No se pudieron cargar los artículos</h3>
+              <p>Visita directamente la newsletter.</p>
+              <p><a class="btn" href="https://alphaandgrid.substack.com" target="_blank">Abrir Substack</a></p>
+            </article>
+          `;
+        });
+    })();
+  </script>
 </body>
 </html>
