@@ -10,8 +10,8 @@
   <!-- Estilos -->
   <style>
     :root{
-      --bg:#0B0D12; --fg:#F5F6F8; --muted:#A6ABC2; --line:#1E2128; --card:#10141A;
-      --brand:#06B6D4; --brand-contrast:#111; --radius:16px; --shadow:0 6px 18px rgba(0,0,0,.3);
+      --bg:#F7F7F8; --fg:#0F1115; --muted:#636774; --line:#E8E8EC; --card:#FFFFFF;
+      --brand:#06B6D4; --brand-contrast:#fff; --radius:16px; --shadow:0 6px 18px rgba(0,0,0,.06);
     }
 
     *{box-sizing:border-box}
@@ -29,7 +29,7 @@
     header{
       position:sticky; top:0; z-index:20;
       backdrop-filter:saturate(140%) blur(6px);
-      background:rgba(11,13,18,0.9);
+      background:rgba(255,255,255,0.85);
       border-bottom:1px solid var(--line);
     }
     .topbar{display:flex; align-items:center; justify-content:space-between; position:relative}
@@ -47,7 +47,6 @@
       transition:transform .06s ease, opacity .2s ease;
     }
     .btn:hover{opacity:.9; transform:translateY(-1px)}
-    .btn.link{background:transparent; color:var(--fg); text-decoration:underline}
 
     .menu-toggle {
       display:none; background:none; border:0; color:var(--fg);
@@ -100,7 +99,7 @@
       nav {
         display:none; flex-direction:column; gap:16px; background:var(--card);
         padding:20px; border-radius:12px; position:absolute; top:56px; right:24px;
-        width: 240px;
+        width: 240px; box-shadow:var(--shadow);
       }
       nav.open{display:flex;}
       .menu-toggle{display:block;}
