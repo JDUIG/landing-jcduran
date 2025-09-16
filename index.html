@@ -38,7 +38,7 @@
     .brand .title{font-weight:700; font-size:1.05rem; color:var(--fg)}
 
     nav{display:flex; gap:18px; align-items:center}
-    nav a{opacity:.92; text-decoration:none; color:var(--fg)}
+    nav a{opacity:.92; text-decoration:none; color:var(--fg); font-weight:400;}
     nav a:hover{opacity:1; text-decoration:underline; color:var(--brand)}
 
     .btn{
@@ -54,8 +54,8 @@
     }
 
     main{padding:24px 0 64px}
-    h1{font-size:2rem; line-height:1.2; margin:0 0 8px}
-    h2{font-size:1.6rem; margin:24px 0 8px}
+    h1{font-size:2.4rem; line-height:1.2; margin:0 0 8px}
+    h2{font-size:1.8rem; margin:24px 0 8px}
     h3{margin:0 0 6px}
     .intro{color:var(--muted); margin:0 0 28px}
 
@@ -71,7 +71,6 @@
     .subtle{color:var(--muted)}
     .cta-row{display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:28px}
     footer{border-top:1px solid var(--line); padding:28px 0; color:var(--muted)}
-    .substack-post-embed{min-height:180px}
 
     .logo-acerca {
       display:block; width:240px; max-width:100%; margin:16px 0 32px 0;
@@ -100,8 +99,10 @@
         display:none; flex-direction:column; gap:16px; background:var(--card);
         padding:20px; border-radius:12px; position:absolute; top:56px; right:24px;
         width: 240px; box-shadow:var(--shadow);
+        opacity:0; pointer-events:none; transform:translateY(-10px);
+        transition:all .3s ease;
       }
-      nav.open{display:flex;}
+      nav.open{display:flex; opacity:1; pointer-events:auto; transform:translateY(0);}
       .menu-toggle{display:block;}
     }
   </style>
@@ -138,33 +139,14 @@
       <p>Es <strong>Ingeniero en Organización Industrial</strong> y cuenta con un <strong>MBA</strong>, además de un <strong>Máster en Mercados Financieros e Inversiones Alternativas (MFIA)</strong>, lo que le aporta una sólida base formativa que complementa su experiencia en los mercados.</p>
     </section>
 
-    <!-- ARTÍCULOS -->
+    <!-- ARTÍCULOS (feed automático) -->
     <section id="articulos" class="articulos">
-  <h2>Artículos</h2>
-  <p class="intro">Últimas publicaciones de Alpha &amp; Grid</p>
+      <h2>Artículos</h2>
+      <p class="intro">Últimas publicaciones de Alpha &amp; Grid</p>
+      <div id="articulos-grid" class="grid"></div>
+    </section>
 
-  <div id="articulos-grid" class="grid">
-    <!-- Fallback opcional: deja tus 3 posts manuales dentro de este comentario.
-    <article class="card">
-      <div class="substack-post-embed" data-theme="auto">
-        <a data-post-link href="https://alphaandgrid.substack.com/p/002-la-inteligencia-artificial-dispara">Leer en Substack</a>
-      </div>
-    </article>
-    <article class="card">
-      <div class="substack-post-embed" data-theme="auto">
-        <a data-post-link href="https://alphaandgrid.substack.com/p/001-mercados-en-transicion-energia">Leer en Substack</a>
-      </div>
-    </article>
-    <article class="card">
-      <div class="substack-post-embed" data-theme="auto">
-        <a data-post-link href="https://alphaandgrid.substack.com/p/bienvenidos-a-alpha-and-grid">Leer en Substack</a>
-      </div>
-    </article>
-    -->
-  </div>
-</section>
-
-       <!-- ACTUALIDAD -->
+    <!-- ACTUALIDAD -->
     <section id="actualidad">
       <h2>Actualidad</h2>
       <div class="grid">
@@ -210,7 +192,7 @@
         </article>
       </div>
     </section>
-    
+
     <!-- CONTACTA -->
     <section id="contacta">
       <h2>Contacta conmigo</h2>
@@ -238,60 +220,43 @@
     </a>
   </div>
 
-  <script async src="https://substack.com/embedjs/embed.js"></script>
+  <!-- Scripts -->
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
     const toggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('nav');
     toggle.addEventListener('click', () => nav.classList.toggle('open'));
+
+    // === Feed automático desde Substack vía rss2json ===
+    (function loadSubstackFeed(){
+      const FEED = 'https://alphaandgrid.substack.com/feed';
+      const API = 'https://api.rss2json.com/v1/api.json?rss_url=';
+      const grid = document.getElementById('articulos-grid');
+      if(!grid) return;
+
+      fetch(API + encodeURIComponent(FEED))
+        .then(r => r.json())
+        .then(data => {
+          if(!data.items?.length) throw new Error('Sin artículos');
+          grid.innerHTML = data.items.slice(0,6).map(item=>{
+            const fecha = new Date(item.pubDate).toLocaleDateString('es-ES',{day:'2-digit',month:'long',year:'numeric'});
+            const text = item.description.replace(/<[^>]+>/g,'').trim();
+            const snippet = text.length>160 ? text.slice(0,157)+'…' : text;
+            return `
+              <article class="card">
+                <h3 style="margin-top:0">${item.title}</h3>
+                <p class="subtle">${fecha}</p>
+                <p>${snippet}</p>
+                <p><a class="btn" href="${item.link}" target="_blank" rel="noopener">Leer en Substack</a></p>
+              </article>
+            `;
+          }).join('');
+        })
+        .catch(err=>console.error('Error cargando feed', err));
+    })();
   </script>
-  // === Artículos auto-actualizables desde Substack ===
-  (function loadSubstackFeed(){
-    const FEED_URL = 'https://alphaandgrid.substack.com/feed'; // RSS oficial
-    const PROXY = 'https://api.allorigins.win/raw?url=';        // Proxy CORS
-    const grid = document.getElementById('articulos-grid');
-    if(!grid) return;
-
-    fetch(PROXY + encodeURIComponent(FEED_URL))
-      .then(r => {
-        if(!r.ok) throw new Error('HTTP ' + r.status);
-        return r.text();
-      })
-      .then(xml => new DOMParser().parseFromString(xml, 'text/xml'))
-      .then(doc => {
-        const items = Array.from(doc.querySelectorAll('item')).slice(0, 6);
-        if (!items.length) throw new Error('No items in feed');
-
-        grid.innerHTML = items.map(item => {
-          const link  = item.querySelector('link')?.textContent || '#';
-          const title = item.querySelector('title')?.textContent || 'Sin título';
-          const pub   = new Date(item.querySelector('pubDate')?.textContent || Date.now());
-          const fecha = pub.toLocaleDateString('es-ES', { day:'2-digit', month:'long', year:'numeric' });
-
-          // Descripción en texto plano (limpia HTML y CDATA)
-          const raw   = item.querySelector('description')?.textContent || '';
-          const text  = raw.replace(/<!\[CDATA\[|\]\]>/g,'').replace(/<[^>]*>/g,'').trim();
-          const snippet = text.length > 160 ? (text.slice(0,157) + '…') : text;
-
-          return `
-            <article class="card">
-              <h3 style="margin-top:0">${title}</h3>
-              <p class="subtle">${fecha}</p>
-              <p>${snippet}</p>
-              <p><a class="btn" href="${link}" target="_blank" rel="noopener">Leer en Substack</a></p>
-            </article>
-          `;
-        }).join('');
-      })
-      .catch(err => {
-        console.warn('No se pudo cargar el feed de Substack:', err);
-        // Fallback: si dejaste tarjetas manuales comentadas arriba, no hacemos nada y seguirá vacío o con tu contenido estático
-      });
-  })();
-</script>
 </body>
 </html>
-
 
 
 
