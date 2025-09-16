@@ -60,18 +60,21 @@
       align-items:start;
     }
     .card{
-      background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:12px;
+      background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:24px;
       box-shadow:var(--shadow);
     }
-    .hero{
-      display:flex; gap:20px; align-items:flex-start; margin:10px 0 28px; flex-wrap:wrap;
-    }
-    .hero img{width:84px; height:84px; border-radius:16px; object-fit:cover; border:1px solid var(--line)}
-    .hero p{margin:0}
     .subtle{color:var(--muted)}
     .cta-row{display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:28px}
     footer{border-top:1px solid var(--line); padding:28px 0; color:var(--muted)}
     .substack-post-embed{min-height:180px}
+
+    /* Logo de Acerca de */
+    .logo-acerca {
+      display: block;
+      width: 240px;       /* tamaño grande */
+      max-width: 100%;
+      margin: 16px 0 32px 0;
+    }
 
     /* Barra flotante lateral */
     .social-fixed {
@@ -136,18 +139,11 @@
   <main class="container">
     <!-- ACERCA DE -->
     <section id="acerca" class="card">
-  <div class="hero">
-    <img src="img/logo-jcd-tight.png" alt="Logo de Juan Carlos Durán" class="logo-acerca">
-    <div>
       <h1>Acerca de</h1>
-      
+      <img src="img/logo-jcd-tight.png" alt="Logo de Juan Carlos Durán" class="logo-acerca">
       <p>Juan Carlos Durán es trader especializado en <strong>commodities</strong> y <strong>energía</strong>, con un enfoque particular en la aplicación de la <strong>inteligencia artificial</strong> al análisis financiero. A lo largo de su trayectoria ha combinado la experiencia en mercados internacionales con el uso de herramientas tecnológicas, compartiendo ideas y estrategias para anticipar tendencias y generar impacto en la toma de decisiones.</p>
-      
       <p>Es <strong>Ingeniero en Organización Industrial</strong> y cuenta con un <strong>MBA</strong>, además de un <strong>Máster en Mercados Financieros e Inversiones Alternativas (MFIA)</strong>, lo que le aporta una sólida base formativa que complementa su experiencia en los mercados.</p>
-     
       <p>Su objetivo es seguir uniendo la experiencia en los mercados con la innovación tecnológica para impulsar mejores decisiones financieras y estratégicas.</p>
-    </div>
-      </div>
     </section>
 
     <!-- ARTÍCULOS -->
@@ -221,7 +217,7 @@
 
   <!-- Barra flotante de redes -->
   <div class="social-fixed">
-    <a href="https://www.linkedin.com/in/tu-perfil" target="_blank" rel="noopener" class="social-btn linkedin">
+    <a href="https://www.linkedin.com/in/juan-carlos-dur%C3%A1n-mfia-69791516/" target="_blank" rel="noopener" class="social-btn linkedin">
       <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
     </a>
     <a href="https://alphaandgrid.substack.com" target="_blank" rel="noopener" class="social-btn substack">
@@ -235,11 +231,6 @@
   </script>
 </body>
 </html>
-
-
-
-
-
 
 
 
