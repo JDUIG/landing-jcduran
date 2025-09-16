@@ -76,8 +76,18 @@
     footer{border-top:1px solid var(--line); padding:28px 0; color:var(--muted)}
 
     .logo-acerca {
-      display:block; width:80px; max-width:100%; margin:8px 0 20px 0;
-    }
+      display: block;
+  width: 60px !important;        /* fuerza tamaño pequeño */
+  height: auto !important;
+  margin: 0 auto 20px auto;       /* centrado encima del texto */
+}
+
+#acerca .bio {
+  display: block;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: justify;
+}
 
     .cta-row{display:flex; justify-content:center; margin-top:32px}
 
@@ -155,7 +165,9 @@
     <section id="acerca" class="card">
       <h1>Acerca de</h1>
       <img src="img/logo-jcd-tight.png" alt="Logo de Juan Carlos Durán" class="logo-acerca">
-      <p>Juan Carlos Durán es trader especializado en <strong>commodities</strong> y <strong>energía</strong>, con un enfoque particular en la aplicación de la <strong>inteligencia artificial</strong> al análisis financiero. A lo largo de su trayectoria ha combinado la experiencia en mercados internacionales con el uso de herramientas tecnológicas, compartiendo ideas y estrategias para anticipar tendencias y generar impacto en la toma de decisiones.</p>
+     <div class="bio">
+    <p>
+      Juan Carlos Durán es trader especializado en <strong>commodities</strong> y <strong>energía</strong>, con un enfoque particular en la aplicación de la <strong>inteligencia artificial</strong> al análisis financiero. A lo largo de su trayectoria ha combinado la experiencia en mercados internacionales con el uso de herramientas tecnológicas, compartiendo ideas y estrategias para anticipar tendencias y generar impacto en la toma de decisiones.</p>
       <p>Es <strong>Ingeniero en Organización Industrial</strong> y cuenta con un <strong>MBA</strong>, además de un <strong>Máster en Mercados Financieros e Inversiones Alternativas (MFIA)</strong>, lo que le aporta una sólida base formativa que complementa su experiencia en los mercados.</p>
     </section>
 
@@ -318,5 +330,6 @@
   </script>
 </body>
 </html>
+
 
 
