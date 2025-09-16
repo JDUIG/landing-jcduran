@@ -10,15 +10,10 @@
   <!-- Estilos -->
   <style>
     :root{
-      --bg:#f7f7f8; --fg:#0f1115; --muted:#636774; --line:#e8e8ec; --card:#ffffff;
-      --brand:#111; --brand-contrast:#fff; --radius:16px; --shadow:0 6px 18px rgba(0,0,0,.06);
+      --bg:#0B0D12; --fg:#F5F6F8; --muted:#A6ABC2; --line:#1E2128; --card:#10141A;
+      --brand:#06B6D4; --brand-contrast:#111; --radius:16px; --shadow:0 6px 18px rgba(0,0,0,.3);
     }
-    @media (prefers-color-scheme: dark){
-      :root{
-        --bg:#0b0d12; --fg:#e9eaf0; --muted:#a6abc2; --line:#20232b; --card:#10141a;
-        --brand:#fff; --brand-contrast:#111; --shadow:none;
-      }
-    }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     html{scroll-behavior:smooth}
@@ -27,21 +22,25 @@
       font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Inter,Ubuntu,Arial,sans-serif;
       -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
     }
+
     a{color:inherit}
     .container{max-width:1100px; margin:0 auto; padding:24px}
+
     header{
       position:sticky; top:0; z-index:20;
       backdrop-filter:saturate(140%) blur(6px);
-      background:color-mix(in oklab, var(--bg) 86%, transparent);
+      background:rgba(11,13,18,0.9);
       border-bottom:1px solid var(--line);
     }
-    .topbar{display:flex; align-items:center; justify-content:space-between}
+    .topbar{display:flex; align-items:center; justify-content:space-between; position:relative}
     .brand{display:flex; align-items:center; gap:10px; text-decoration:none}
     .brand .logo{width:28px; height:28px; border-radius:8px; background:var(--brand)}
-    .brand .title{font-weight:700; font-size:1.05rem}
+    .brand .title{font-weight:700; font-size:1.05rem; color:var(--fg)}
+
     nav{display:flex; gap:18px; align-items:center}
-    nav a{opacity:.92; text-decoration:none}
-    nav a:hover{opacity:1; text-decoration:underline}
+    nav a{opacity:.92; text-decoration:none; color:var(--fg)}
+    nav a:hover{opacity:1; text-decoration:underline; color:var(--brand)}
+
     .btn{
       display:inline-block; background:var(--brand); color:var(--brand-contrast);
       text-decoration:none; padding:10px 14px; border-radius:10px; font-weight:600;
@@ -49,11 +48,18 @@
     }
     .btn:hover{opacity:.9; transform:translateY(-1px)}
     .btn.link{background:transparent; color:var(--fg); text-decoration:underline}
+
+    .menu-toggle {
+      display:none; background:none; border:0; color:var(--fg);
+      font-size:1.8rem; cursor:pointer;
+    }
+
     main{padding:24px 0 64px}
     h1{font-size:2rem; line-height:1.2; margin:0 0 8px}
     h2{font-size:1.6rem; margin:24px 0 8px}
     h3{margin:0 0 6px}
     .intro{color:var(--muted); margin:0 0 28px}
+
     .grid{
       display:grid; gap:24px;
       grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
@@ -68,30 +74,18 @@
     footer{border-top:1px solid var(--line); padding:28px 0; color:var(--muted)}
     .substack-post-embed{min-height:180px}
 
-    /* Logo de Acerca de */
     .logo-acerca {
-      display: block;
-      width: 240px;       /* tamaño grande */
-      max-width: 100%;
-      margin: 16px 0 32px 0;
+      display:block; width:240px; max-width:100%; margin:16px 0 32px 0;
     }
 
-    /* Barra flotante lateral */
+    /* Barra lateral fija de redes */
     .social-fixed {
-      position: fixed;
-      top: 40%;
-      right: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      z-index: 9999;
+      position: fixed; top: 40%; right: 24px;
+      display: flex; flex-direction: column; gap: 14px; z-index: 9999;
     }
     .social-btn img {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: #fff;
-      border: 1px solid #ddd;
+      width: 38px; height: 38px; border-radius: 50%;
+      background: #fff; border: 1px solid #ddd;
       box-shadow: 0 2px 6px rgba(0,0,0,.15);
       transition: transform .2s ease, box-shadow .2s ease;
     }
@@ -99,18 +93,17 @@
       transform: scale(1.1);
       box-shadow: 0 4px 10px rgba(0,0,0,.25);
     }
-    @media (max-width: 720px){
-      .social-fixed {
-        right: 12px;
-        top: auto;
-        bottom: 20px;
-        flex-direction: row;
-      }
-    }
 
-    @media (max-width:560px){
-      h1{font-size:1.7rem}
-      nav{display:none}
+    /* Responsive */
+    @media (max-width: 720px){
+      .social-fixed { right:12px; top:auto; bottom:20px; flex-direction:row; }
+      nav {
+        display:none; flex-direction:column; gap:16px; background:var(--card);
+        padding:20px; border-radius:12px; position:absolute; top:56px; right:24px;
+        width: 240px;
+      }
+      nav.open{display:flex;}
+      .menu-toggle{display:block;}
     }
   </style>
 </head>
@@ -123,6 +116,7 @@
         <span class="logo" aria-hidden="true"></span>
         <span class="title">Juan Carlos Durán</span>
       </a>
+      <button class="menu-toggle" aria-label="Abrir menú">☰</button>
       <nav aria-label="Principal">
         <a href="#acerca">ACERCA DE</a>
         <a href="#articulos">ARTÍCULOS</a>
@@ -143,7 +137,6 @@
       <img src="img/logo-jcd-tight.png" alt="Logo de Juan Carlos Durán" class="logo-acerca">
       <p>Juan Carlos Durán es trader especializado en <strong>commodities</strong> y <strong>energía</strong>, con un enfoque particular en la aplicación de la <strong>inteligencia artificial</strong> al análisis financiero. A lo largo de su trayectoria ha combinado la experiencia en mercados internacionales con el uso de herramientas tecnológicas, compartiendo ideas y estrategias para anticipar tendencias y generar impacto en la toma de decisiones.</p>
       <p>Es <strong>Ingeniero en Organización Industrial</strong> y cuenta con un <strong>MBA</strong>, además de un <strong>Máster en Mercados Financieros e Inversiones Alternativas (MFIA)</strong>, lo que le aporta una sólida base formativa que complementa su experiencia en los mercados.</p>
-      <p>Su objetivo es seguir uniendo la experiencia en los mercados con la innovación tecnológica para impulsar mejores decisiones financieras y estratégicas.</p>
     </section>
 
     <!-- ARTÍCULOS -->
@@ -170,34 +163,6 @@
       </div>
     </section>
 
-    <!-- ACTUALIDAD -->
-    <section id="actualidad">
-      <h2>Actualidad</h2>
-      <article class="card">
-        <h3 style="margin-top:0">Blockchain acelera la tokenización de activos</h3>
-        <p class="subtle">10 septiembre 2025</p>
-        <p>Selección de prensa sobre impacto en mercados financieros. <em>Fuente</em>.</p>
-      </article>
-    </section>
-
-    <!-- CONCEPTOS -->
-    <section id="conceptos">
-      <h2>Conceptos</h2>
-      <article class="card">
-        <h3 style="margin-top:0">Qué es el <em>basis</em> en commodities</h3>
-        <p>Relación entre precio <em>spot</em> y futuros y su importancia en coberturas. <a href="#">Leer explicación</a></p>
-      </article>
-    </section>
-
-    <!-- FORMACIÓN -->
-    <section id="formacion">
-      <h2>Formación</h2>
-      <article class="card">
-        <h3 style="margin-top:0">Guía: Coberturas básicas con futuros</h3>
-        <p>Paso a paso con ejemplos y hoja de cálculo descargable. <a href="#">Abrir guía</a></p>
-      </article>
-    </section>
-
     <!-- CONTACTA -->
     <section id="contacta">
       <h2>Contacta conmigo</h2>
@@ -215,7 +180,7 @@
     </div>
   </footer>
 
-  <!-- Barra flotante de redes -->
+  <!-- Redes -->
   <div class="social-fixed">
     <a href="https://www.linkedin.com/in/juan-carlos-dur%C3%A1n-mfia-69791516/" target="_blank" rel="noopener" class="social-btn linkedin">
       <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
@@ -228,9 +193,13 @@
   <script async src="https://substack.com/embedjs/embed.js"></script>
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.querySelector('nav');
+    toggle.addEventListener('click', () => nav.classList.toggle('open'));
   </script>
 </body>
 </html>
+
 
 
 
