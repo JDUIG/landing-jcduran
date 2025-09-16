@@ -7,7 +7,7 @@
   <meta name="description" content="Análisis sobre IA, mercados y energía por Juan Carlos Durán. Lee los últimos artículos y suscríbete gratis a la newsletter Alpha & Grid." />
   <link rel="icon" href="favicon.png" />
 
-  <!-- Estilos adaptados al tema visual actual: minimalista, limpio, con modo oscuro automático -->
+  <!-- Estilos -->
   <style>
     :root{
       --bg:#f7f7f8; --fg:#0f1115; --muted:#636774; --line:#e8e8ec; --card:#ffffff;
@@ -71,8 +71,40 @@
     .subtle{color:var(--muted)}
     .cta-row{display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin-top:28px}
     footer{border-top:1px solid var(--line); padding:28px 0; color:var(--muted)}
-    /* Evita “saltos” mientras carga el embed */
     .substack-post-embed{min-height:180px}
+
+    /* Barra flotante lateral */
+    .social-fixed {
+      position: fixed;
+      top: 40%;
+      right: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      z-index: 9999;
+    }
+    .social-btn img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #fff;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 6px rgba(0,0,0,.15);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .social-btn img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,.25);
+    }
+    @media (max-width: 720px){
+      .social-fixed {
+        right: 12px;
+        top: auto;
+        bottom: 20px;
+        flex-direction: row;
+      }
+    }
+
     @media (max-width:560px){
       h1{font-size:1.7rem}
       nav{display:none}
@@ -108,57 +140,34 @@
         <img src="img/jcd.jpg" alt="Foto de Juan Carlos Durán" onerror="this.style.display='none'"/>
         <div>
           <h1>Acerca de</h1>
-      <p>Juan Carlos Durán es trader especializado en <strong>commodities</strong> y <strong>energía</strong>, con un enfoque particular en la aplicación de la <strong>inteligencia artificial</strong> al análisis financiero. A lo largo de su trayectoria ha combinado la experiencia en mercados internacionales con el uso de herramientas tecnológicas, compartiendo ideas y estrategias para anticipar tendencias y generar impacto en la toma de decisiones.</p>
-      <p>Es <strong>Ingeniero en Organización Industrial</strong> y cuenta con un <strong>MBA</strong>, además de un <strong>Máster en Mercados Financieros e Inversiones Alternativas (MFIA)</strong>, lo que le aporta una sólida base formativa que complementa su experiencia en los mercados.</p>
-      <p>Su objetivo es seguir uniendo la experiencia en los mercados con la innovación tecnológica para impulsar mejores decisiones financieras y estratégicas.</p>
-          <p class="subtle">LinkedIn: <a href="https://www.linkedin.com" target="_blank" rel="noopener">perfil</a> · Newsletter: <a href="https://alphaandgrid.substack.com" target="_blank" rel="noopener">Alpha &amp; Grid</a></p>
+          <p>Juan Carlos Durán es trader especializado en <strong>commodities</strong> y <strong>energía</strong>, con un enfoque particular en la aplicación de la <strong>inteligencia artificial</strong> al análisis financiero. A lo largo de su trayectoria ha combinado la experiencia en mercados internacionales con el uso de herramientas tecnológicas, compartiendo ideas y estrategias para anticipar tendencias y generar impacto en la toma de decisiones.</p>
+          <p>Es <strong>Ingeniero en Organización Industrial</strong> y cuenta con un <strong>MBA</strong>, además de un <strong>Máster en Mercados Financieros e Inversiones Alternativas (MFIA)</strong>, lo que le aporta una sólida base formativa que complementa su experiencia en los mercados.</p>
+          <p>Su objetivo es seguir uniendo la experiencia en los mercados con la innovación tecnológica para impulsar mejores decisiones financieras y estratégicas.</p>
         </div>
       </div>
     </section>
 
-    <!-- ARTÍCULOS (Substack embebido) -->
+    <!-- ARTÍCULOS -->
     <section id="articulos" class="articulos">
       <h2>Artículos</h2>
       <p class="intro">Últimas publicaciones de Alpha &amp; Grid</p>
 
       <div class="grid">
-        <!-- Artículo 1 -->
         <article class="card">
           <div class="substack-post-embed" data-theme="auto">
             <a data-post-link href="https://alphaandgrid.substack.com/p/002-la-inteligencia-artificial-dispara">Leer en Substack</a>
           </div>
         </article>
-
-         <!-- Artículo 2 (corregido) -->
         <article class="card">
           <div class="substack-post-embed" data-theme="auto">
             <a data-post-link href="https://alphaandgrid.substack.com/p/001-mercados-en-transicion-energia">Leer en Substack</a>
           </div>
         </article>
-
-        <!-- Artículo 3 -->
         <article class="card">
           <div class="substack-post-embed" data-theme="auto">
             <a data-post-link href="https://alphaandgrid.substack.com/p/bienvenidos-a-alpha-and-grid">Leer en Substack</a>
           </div>
         </article>
-      </div>
-
-      <div class="cta-row">
-        <a class="btn" href="https://alphaandgrid.substack.com/subscribe" target="_blank" rel="noopener">Suscribirse gratis</a>
-        <a class="btn link" href="https://alphaandgrid.substack.com/archive" target="_blank" rel="noopener">Ver archivo completo</a>
-        <span class="subtle">Nuevos artículos cada semana.</span>
-      </div>
-
-      <!-- Formulario de suscripción (opcional) -->
-      <div style="margin-top:24px">
-        <iframe
-          src="https://alphaandgrid.substack.com/embed"
-          width="100%" height="220"
-          style="border:1px solid var(--line); border-radius:12px; background:var(--card);"
-          frameborder="0" scrolling="no"
-          title="Suscripción a la newsletter">
-        </iframe>
       </div>
     </section>
 
@@ -196,11 +205,6 @@
       <article class="card">
         <p>¿Te gustaría colaborar?</p>
         <p><a class="btn" href="mailto:tuemail@dominio.com">Envíame un correo</a></p>
-        <h3 style="margin-top:20px">Perfil y redes</h3>
-        <p class="subtle">
-          <a href="https://www.linkedin.com" target="_blank" rel="noopener">LinkedIn</a> ·
-          <a href="https://alphaandgrid.substack.com" target="_blank" rel="noopener">Alpha &amp; Grid en Substack</a>
-        </p>
       </article>
     </section>
   </main>
@@ -212,13 +216,24 @@
     </div>
   </footer>
 
-  <!-- Script oficial de Substack: necesario UNA sola vez por página -->
+  <!-- Barra flotante de redes -->
+  <div class="social-fixed">
+    <a href="https://www.linkedin.com/in/tu-perfil" target="_blank" rel="noopener" class="social-btn linkedin">
+      <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="LinkedIn">
+    </a>
+    <a href="https://alphaandgrid.substack.com" target="_blank" rel="noopener" class="social-btn substack">
+      <img src="https://cdn.worldvectorlogo.com/logos/substack-1.svg" alt="Substack">
+    </a>
+  </div>
+
   <script async src="https://substack.com/embedjs/embed.js"></script>
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
+
+
 
 
 
