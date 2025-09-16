@@ -143,8 +143,7 @@
     <section id="articulos" class="articulos">
       <h2>Artículos</h2>
       <p class="intro">Últimas publicaciones de Alpha &amp; Grid</p>
-      <!-- ESTE ES EL CONTENEDOR VACÍO -->
-  <div id="articulos-grid" class="grid"></div>
+      <div id="articulos-grid" class="grid"></div>
     </section>
 
     <!-- ACTUALIDAD -->
@@ -255,9 +254,31 @@
         })
         .catch(err=>console.error('Error cargando feed', err));
     })();
+  <script>
+// TEST: insertar artículos ficticios para comprobar diseño
+document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.getElementById('articulos-grid');
+  if(!grid) return alert('No existe #articulos-grid');
+
+  grid.innerHTML = `
+    <article class="card">
+      <h3>Artículo de prueba 1</h3>
+      <p class="subtle">16 septiembre 2025</p>
+      <p>Este es un texto ficticio para comprobar que el diseño funciona correctamente.</p>
+      <p><a class="btn" href="#">Leer más</a></p>
+    </article>
+    <article class="card">
+      <h3>Artículo de prueba 2</h3>
+      <p class="subtle">15 septiembre 2025</p>
+      <p>Segundo artículo ficticio para verificar el contenedor de artículos.</p>
+      <p><a class="btn" href="#">Leer más</a></p>
+    </article>
+  `;
+});
   </script>
 </body>
 </html>
+
 
 
 
